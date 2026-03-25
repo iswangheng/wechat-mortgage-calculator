@@ -364,7 +364,8 @@ function drawBarChart(canvas, ctx, data, options = {}) {
       if (v > yMax) yMax = v;
     });
   });
-  yMax = yMax * 1.15;
+  // Guard against zero yMax to prevent division by zero
+  yMax = Math.max(yMax * 1.15, 1);
 
   const toY = (value) => padding.top + chartHeight - (value / yMax) * chartHeight;
 
@@ -498,6 +499,10 @@ function formatNumber(num) {
  * @returns {string}
  */
 function hexToRgba(hex, alpha) {
+  // Validate hex format; fall back to default color on invalid input
+  if (!hex || typeof hex !== 'string' || !/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+    hex = '#667eea';
+  }
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);

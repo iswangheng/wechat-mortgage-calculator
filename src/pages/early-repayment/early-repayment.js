@@ -15,31 +15,13 @@ Page({
     afterMethod: 'reduceTerm', // 还款后处理方式：reduceTerm缩短年限 | reducePayment减少月供
 
     // 计算结果
-    result: null
-  },
+    result: null,
 
-  // 计算已还年月
-  computed: {
-    paidYears() {
-      const months = parseInt(this.data.paidMonths) || 0;
-      return Math.floor(months / 12);
-    },
-    paidMonthsRemain() {
-      const months = parseInt(this.data.paidMonths) || 0;
-      return months % 12;
-    },
-    savedYears() {
-      if (!this.data.result || !this.data.result.afterEarlyPayment.savedMonths) {
-        return 0;
-      }
-      return Math.floor(this.data.result.afterEarlyPayment.savedMonths / 12);
-    },
-    savedMonths() {
-      if (!this.data.result || !this.data.result.afterEarlyPayment.savedMonths) {
-        return 0;
-      }
-      return this.data.result.afterEarlyPayment.savedMonths % 12;
-    }
+    // Computed fields (updated via updateComputedData)
+    paidYears: 0,
+    paidMonthsRemain: 0,
+    savedYears: 0,
+    savedMonths: 0
   },
 
   onLoad() {

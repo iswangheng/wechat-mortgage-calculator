@@ -16,6 +16,9 @@ Page({
     displaySchedule: [],
     showFullSchedule: false,
 
+    // Annual rate from calculation input
+    annualRate: 0,
+
     // Statistics
     monthlyDecrease: 0,
     totalPrincipalPaid: 0,
@@ -50,6 +53,7 @@ Page({
       loanTypeName: loanTypeNames[calcResult.loanType],
       method: calcResult.method,
       years: calcResult.years,
+      annualRate: calcResult.annualRate || 0,
       result: calcResult.result
     });
 
@@ -229,9 +233,9 @@ Page({
         });
       }
     } else {
-      // Equal principal
+      // Equal principal: use actual annual rate from calculation input
       const monthlyPrincipal = principal / totalMonths;
-      const monthlyRate = (totalInterest / principal) / totalMonths * 2;
+      const monthlyRate = this.data.annualRate / 100 / 12;
 
       let balance = principal;
 

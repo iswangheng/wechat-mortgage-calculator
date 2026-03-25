@@ -719,12 +719,17 @@ Page({
     // 将结果存储到全局数据或通过路由参数传递
     const app = getApp();
     app.globalData = app.globalData || {};
+    // Include annualRate so result page can compute monthly rate accurately
+    const { commercialRate, fundRate } = this.data;
+    const annualRate = loanType === 'fund' ? parseFloat(fundRate) : parseFloat(commercialRate);
+
     app.globalData.calculationResult = {
       result: this.data.result,
       loanType,
       method,
       cityName,
-      years
+      years,
+      annualRate
     };
 
     wx.navigateTo({

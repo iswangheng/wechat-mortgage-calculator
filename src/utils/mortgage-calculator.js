@@ -244,9 +244,14 @@ function calculateEarlyRepayment(params) {
     const M = method === '等额本金' ? original.firstMonthPayment : original.monthlyPayment;
     const P = newPrincipal * 10000;
 
-    // 等额本息年限倒推
-    let newMonths = Math.log(M / (M - P * r)) / Math.log(1 + r);
-    newMonths = Math.ceil(newMonths);
+    // Calculate new term; handle zero-rate to avoid division by zero in log
+    let newMonths;
+    if (r < 1e-10) {
+      newMonths = Math.ceil(P / M);
+    } else {
+      newMonths = Math.log(M / (M - P * r)) / Math.log(1 + r);
+      newMonths = Math.ceil(newMonths);
+    }
     const newYears = newMonths / 12;
 
     if (method === '等额本金') {
