@@ -542,6 +542,11 @@
   color: #c62828;
 }
 
+.safety-status.info {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
 /* ========== History entry button ========== */
 .history-entry {
   display: flex;
