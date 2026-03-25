@@ -3,30 +3,30 @@ App({
   globalData: {
     userInfo: null,
     calculationResult: null,
-    selectedCity: '上海'
+    selectedCity: "上海",
   },
 
   onLaunch() {
     // 显示本地存储能力
-    const logs = wx.getStorageSync('logs') || [];
+    const logs = wx.getStorageSync("logs") || [];
     logs.unshift(Date.now());
-    wx.setStorageSync('logs', logs);
+    wx.setStorageSync("logs", logs);
 
     // 登录
     wx.login({
-      success: res => {
+      success: (res) => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('登录成功', res.code);
-      }
+        console.log("登录成功", res.code);
+      },
     });
 
     // 获取用户信息
     wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
+      success: (res) => {
+        if (res.authSetting["scope.userInfo"]) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
-            success: res => {
+            success: (res) => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo;
 
@@ -35,29 +35,36 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res);
               }
-            }
+            },
           });
         }
-      }
+      },
     });
+
+    // Analytics: track app launch
+    try {
+      wx.reportAnalytics("app_launch", { timestamp: Date.now() });
+    } catch (e) {
+      /* ignore analytics error */
+    }
 
     // 获取系统信息
     const systemInfo = wx.getSystemInfoSync();
     this.globalData.systemInfo = systemInfo;
-    console.log('系统信息:', systemInfo);
+    console.log("系统信息:", systemInfo);
 
     // 加载上次选择的城市
-    const lastCity = wx.getStorageSync('lastSelectedCity');
+    const lastCity = wx.getStorageSync("lastSelectedCity");
     if (lastCity) {
       this.globalData.selectedCity = lastCity;
     }
   },
 
   onShow() {
-    console.log('App Show');
+    console.log("App Show");
   },
 
   onHide() {
-    console.log('App Hide');
-  }
+    console.log("App Hide");
+  },
 });
