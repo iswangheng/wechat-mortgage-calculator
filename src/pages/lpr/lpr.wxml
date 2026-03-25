@@ -62,6 +62,7 @@
         <input
           type="digit"
           value="{{loanAmount}}"
+          placeholder="请输入贷款金额"
           bindinput="onLoanAmountInput"
           class="sim-input"/>
         <text class="sim-unit">万元</text>

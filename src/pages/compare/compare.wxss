@@ -35,6 +35,11 @@
   background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
   border-radius: 12rpx;
   border: 2rpx solid #1677FF;
+  transition: opacity 0.2s;
+}
+
+.city-selector:active {
+  opacity: 0.7;
 }
 
 .city-name {
@@ -140,6 +145,11 @@
   border-radius: 16rpx;
   padding: 24rpx 0;
   border: 2rpx solid #1677FF;
+  transition: background 0.2s;
+}
+
+.btn-reset:active {
+  background: #e9ecef;
 }
 
 .btn-compare {
@@ -151,6 +161,11 @@
   border-radius: 16rpx;
   padding: 24rpx 0;
   border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-compare:active {
+  opacity: 0.85;
 }
 
 .btn-reset::after,

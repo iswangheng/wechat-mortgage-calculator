@@ -613,6 +613,15 @@ Page({
 
       const safetyLine = calculateSafetyLine(monthlyPayment);
 
+      // Map suggestion text to CSS class name
+      let safetyClass = 'safe';
+      if (safetyLine.suggestion.includes('可接受')) {
+        safetyClass = 'warning';
+      } else if (safetyLine.suggestion.includes('压力大')) {
+        safetyClass = 'danger';
+      }
+      safetyLine.statusClass = safetyClass;
+
       this.setData({
         result: formattedResult,
         safetyLine

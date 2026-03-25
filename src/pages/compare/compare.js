@@ -20,15 +20,16 @@ Page({
   },
 
   onShow() {
-    // 获取上次选择的城市
-    const app = getApp();
-    if (app.globalData.selectedCity) {
-      const cityConfig = getCityConfig(app.globalData.selectedCity);
-      this.setData({
-        cityName: app.globalData.selectedCity,
-        annualRate: cityConfig.commercialRate.first
-      });
+    // Update rate when city changes (e.g. returning from city-select)
+    const cityConfig = getCityConfig(this.data.cityName);
+    const { loanType } = this.data;
+    let annualRate;
+    if (loanType === 'fund') {
+      annualRate = cityConfig.fundRate.first;
+    } else {
+      annualRate = cityConfig.commercialRate.first;
     }
+    this.setData({ annualRate });
   },
 
   // 城市选择

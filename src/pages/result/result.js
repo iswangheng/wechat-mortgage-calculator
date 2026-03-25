@@ -330,16 +330,16 @@ Page({
     this.updateStatistics();
   },
 
-  // Navigate to compare page
+  // Navigate to compare page (tab page, must use switchTab)
   onGoToCompare() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '/pages/compare/compare'
     });
   },
 
-  // Navigate to early repayment page
+  // Navigate to early repayment page (tab page, must use switchTab)
   onGoToEarlyRepayment() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '/pages/early-repayment/early-repayment'
     });
   },

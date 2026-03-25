@@ -29,6 +29,11 @@
   background: #fff0f0;
   border-radius: 20rpx;
   border: 1rpx solid #ffcdd2;
+  transition: background 0.2s;
+}
+
+.clear-btn:active {
+  background: #ffcdd2;
 }
 
 .clear-text {
@@ -56,9 +61,13 @@
   border-radius: 20rpx;
   padding: 30rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.2s;
   position: relative;
   z-index: 1;
+}
+
+.history-card:active {
+  background: #f8f9fa;
 }
 
 .history-card.swiped {
@@ -153,6 +162,17 @@
 .card-time {
   font-size: 24rpx;
   color: #bbbbbb;
+}
+
+.card-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.card-tap-hint {
+  font-size: 22rpx;
+  color: #1677FF;
 }
 
 .card-tags {

@@ -35,6 +35,13 @@
     </view>
   </view>
 
+  <!-- Search empty state -->
+  <view class="search-empty" wx:if="{{searchKey && filteredCities.length === 0}}">
+    <text class="search-empty-icon">🔍</text>
+    <text class="search-empty-text">未找到"{{searchKey}}"相关城市</text>
+    <text class="search-empty-hint">可选择"其他城市"使用默认配置</text>
+  </view>
+
   <!-- 其他城市 -->
   <view class="section">
     <view class="city-item" bindtap="onCityTap" data-city="其他城市">

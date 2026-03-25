@@ -183,6 +183,11 @@
   border-radius: 16rpx;
   padding: 24rpx 0;
   border: 2rpx solid #1677FF;
+  transition: background 0.2s;
+}
+
+.btn-reset:active {
+  background: #e9ecef;
 }
 
 .btn-calculate {
@@ -194,6 +199,11 @@
   border-radius: 16rpx;
   padding: 24rpx 0;
   border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-calculate:active {
+  opacity: 0.85;
 }
 
 .btn-reset::after,

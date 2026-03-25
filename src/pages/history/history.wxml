@@ -43,8 +43,11 @@
 
           <view class="card-footer">
             <text class="card-time">{{item.displayTime}}</text>
-            <view class="card-tags" wx:if="{{item.tags.length > 0}}">
-              <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+            <view class="card-footer-right">
+              <view class="card-tags" wx:if="{{item.tags.length > 0}}">
+                <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+              </view>
+              <text class="card-tap-hint">点击恢复 ›</text>
             </view>
           </view>
         </view>

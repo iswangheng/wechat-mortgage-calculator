@@ -126,6 +126,31 @@
   opacity: 0.8;
 }
 
+/* Search empty state */
+.search-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 40rpx;
+  margin: 30rpx;
+}
+
+.search-empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-empty-text {
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 8rpx;
+}
+
+.search-empty-hint {
+  font-size: 24rpx;
+  color: #999999;
+}
+
 /* 空状态 */
 .empty-state {
   text-align: center;

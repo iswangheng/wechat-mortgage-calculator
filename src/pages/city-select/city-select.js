@@ -10,10 +10,10 @@ Page({
   },
 
   onLoad(options) {
-    // 获取当前选中的城市
+    // Get current selected city from previous page or global data
     const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2];
-    const currentCity = prevPage.data.cityName || '上海';
+    const prevPage = pages.length >= 2 ? pages[pages.length - 2] : null;
+    const currentCity = (prevPage && prevPage.data.cityName) || getApp().globalData.selectedCity || '上海';
 
     // 获取城市列表
     const citiesByLevel = getCitiesByLevel();
@@ -58,22 +58,40 @@ Page({
   onCityTap(e) {
     const city = e.currentTarget.dataset.city;
 
+    // Store selected city in global data for any page to pick up
+    const app = getApp();
+    app.globalData.selectedCity = city;
+    wx.setStorageSync('lastSelectedCity', city);
+
     // 获取上一页面
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2];
 
-    // 更新上一页面的城市信息
-    prevPage.setData({
-      cityName: city,
-      result: null,
-      safetyLine: null
-    });
+    if (prevPage) {
+      // Update city name on previous page
+      const updateData = { cityName: city };
 
-    // Apply city defaults and persist selection
-    prevPage.applyCityDefaults(city);
+      // Clear result/safetyLine if they exist on the previous page
+      if (prevPage.data.result !== undefined) {
+        updateData.result = null;
+      }
+      if (prevPage.data.safetyLine !== undefined) {
+        updateData.safetyLine = null;
+      }
+      if (prevPage.data.comparison !== undefined) {
+        updateData.comparison = null;
+      }
 
-    // Reload city config
-    prevPage.loadCityConfig();
+      prevPage.setData(updateData);
+
+      // Call page-specific methods if they exist
+      if (typeof prevPage.applyCityDefaults === 'function') {
+        prevPage.applyCityDefaults(city);
+      }
+      if (typeof prevPage.loadCityConfig === 'function') {
+        prevPage.loadCityConfig(city);
+      }
+    }
 
     // 返回上一页
     wx.navigateBack();
