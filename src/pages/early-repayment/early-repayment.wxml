@@ -1,0 +1,323 @@
+<!-- 提前还款计算页面 -->
+<view class="container">
+
+  <!-- 输入区域 -->
+  <view class="input-section">
+
+    <!-- 原贷款信息卡片 -->
+    <view class="info-card">
+      <view class="card-title">📋 原贷款信息</view>
+
+      <!-- 贷款总额 -->
+      <view class="input-group">
+        <view class="input-label">贷款总额</view>
+        <view class="input-row">
+          <input
+            class="input-field"
+            type="digit"
+            value="{{originalPrincipal}}"
+            placeholder="请输入原贷款总额"
+            bindinput="onOriginalPrincipalInput"
+          />
+          <text class="input-unit">万元</text>
+        </view>
+      </view>
+
+      <!-- 年利率 -->
+      <view class="input-group">
+        <view class="input-label">年利率</view>
+        <view class="input-row">
+          <input
+            class="input-field"
+            type="digit"
+            value="{{annualRate}}"
+            placeholder="请输入年利率"
+            bindinput="onAnnualRateInput"
+          />
+          <text class="input-unit">%</text>
+        </view>
+      </view>
+
+      <!-- 贷款年限 -->
+      <view class="input-group">
+        <view class="input-label">贷款年限</view>
+        <view class="years-selector">
+          <view
+            class="year-item {{years === 10 ? 'active' : ''}}"
+            bindtap="onYearsChange"
+            data-years="10">
+            10年
+          </view>
+          <view
+            class="year-item {{years === 20 ? 'active' : ''}}"
+            bindtap="onYearsChange"
+            data-years="20">
+            20年
+          </view>
+          <view
+            class="year-item {{years === 30 ? 'active' : ''}}"
+            bindtap="onYearsChange"
+            data-years="30">
+            30年
+          </view>
+        </view>
+      </view>
+
+      <!-- 还款方式 -->
+      <view class="input-group">
+        <view class="input-label">还款方式</view>
+        <view class="method-selector">
+          <view
+            class="method-item {{method === '等额本息' ? 'active' : ''}}"
+            bindtap="onMethodChange"
+            data-method="等额本息">
+            等额本息
+          </view>
+          <view
+            class="method-item {{method === '等额本金' ? 'active' : ''}}"
+            bindtap="onMethodChange"
+            data-method="等额本金">
+            等额本金
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 提前还款信息卡片 -->
+    <view class="info-card">
+      <view class="card-title">💰 提前还款信息</view>
+
+      <!-- 已还月数 -->
+      <view class="input-group">
+        <view class="input-label">已还月数</view>
+        <view class="input-row">
+          <input
+            class="input-field"
+            type="number"
+            value="{{paidMonths}}"
+            placeholder="已还款多少个月"
+            bindinput="onPaidMonthsInput"
+          />
+          <text class="input-unit">月</text>
+        </view>
+        <view class="input-tip">已还款 {{paidYears}} 年 {{paidMonthsRemain}} 个月</view>
+      </view>
+
+      <!-- 提前还款金额 -->
+      <view class="input-group">
+        <view class="input-label">提前还款金额</view>
+        <view class="input-row">
+          <input
+            class="input-field"
+            type="digit"
+            value="{{earlyAmount}}"
+            placeholder="计划提前还款金额"
+            bindinput="onEarlyAmountInput"
+          />
+          <text class="input-unit">万元</text>
+        </view>
+      </view>
+
+      <!-- 还款后处理方式 -->
+      <view class="input-group">
+        <view class="input-label">还款后选择</view>
+        <view class="after-method-selector">
+          <view
+            class="after-method-item {{afterMethod === 'reduceTerm' ? 'active' : ''}}"
+            bindtap="onAfterMethodChange"
+            data-method="reduceTerm">
+            <view class="method-icon">⏱️</view>
+            <view class="method-name">缩短年限</view>
+            <view class="method-desc">月供不变</view>
+          </view>
+          <view
+            class="after-method-item {{afterMethod === 'reducePayment' ? 'active' : ''}}"
+            bindtap="onAfterMethodChange"
+            data-method="reducePayment">
+            <view class="method-icon">💸</view>
+            <view class="method-name">减少月供</view>
+            <view class="method-desc">年限不变</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 计算按钮 -->
+    <view class="action-buttons">
+      <button class="btn-reset" bindtap="onReset">重置</button>
+      <button class="btn-calculate" bindtap="onCalculate">计算节省</button>
+    </view>
+
+  </view>
+
+  <!-- 计算结果 -->
+  <view class="result-section" wx:if="{{result}}">
+
+    <!-- 对比总览卡片 -->
+    <view class="overview-card">
+      <view class="overview-title">📊 对比总览</view>
+
+      <view class="overview-comparison">
+        <!-- 原贷款 -->
+        <view class="comparison-column">
+          <view class="column-label">原贷款</view>
+
+          <view class="data-item">
+            <text class="data-label">月供</text>
+            <text class="data-value">¥{{result.original.monthlyPayment}}</text>
+          </view>
+
+          <view class="data-item">
+            <text class="data-label">总利息</text>
+            <text class="data-value warning">¥{{result.original.totalInterest}}</text>
+          </view>
+
+          <view class="data-item">
+            <text class="data-label">还款年限</text>
+            <text class="data-value">{{result.original.years}}年</text>
+          </view>
+        </view>
+
+        <view class="comparison-divider">
+          <text class="arrow">→</text>
+        </view>
+
+        <!-- 提前还款后 -->
+        <view class="comparison-column">
+          <view class="column-label highlight">提前还款后</view>
+
+          <view class="data-item" wx:if="{{result.type === '缩短年限'}}">
+            <text class="data-label">月供</text>
+            <text class="data-value">¥{{result.afterEarlyPayment.monthlyPayment}}</text>
+          </view>
+
+          <view class="data-item" wx:if="{{result.type === '减少月供'}}">
+            <text class="data-label">月供</text>
+            <text class="data-value success">¥{{result.afterEarlyPayment.monthlyPayment}}</text>
+          </view>
+
+          <view class="data-item">
+            <text class="data-label">总利息</text>
+            <text class="data-value success">¥{{result.afterEarlyPayment.newTotalInterest}}</text>
+          </view>
+
+          <view class="data-item" wx:if="{{result.type === '缩短年限'}}">
+            <text class="data-label">还款年限</text>
+            <text class="data-value success">{{result.afterEarlyPayment.newYears}}年</text>
+          </view>
+
+          <view class="data-item" wx:if="{{result.type === '减少月供'}}">
+            <text class="data-label">还款年限</text>
+            <text class="data-value">{{result.afterEarlyPayment.newYears}}年</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 节省详情卡片 -->
+    <view class="savings-card">
+      <view class="savings-title">🎉 节省详情</view>
+
+      <view class="savings-highlight">
+        <view class="highlight-label">节省利息总额</view>
+        <view class="highlight-value">¥{{result.afterEarlyPayment.savedInterest}}</view>
+      </view>
+
+      <view class="savings-details">
+        <view class="detail-item">
+          <text class="detail-label">提前还款金额</text>
+          <text class="detail-value">¥{{result.afterEarlyPayment.earlyAmount}}万</text>
+        </view>
+
+        <view class="detail-item" wx:if="{{result.type === '缩短年限'}}">
+          <text class="detail-label">缩短还款时间</text>
+          <text class="detail-value">{{savedYears}}年{{savedMonths}}个月</text>
+        </view>
+
+        <view class="detail-item" wx:if="{{result.type === '减少月供'}}">
+          <text class="detail-label">每月减少月供</text>
+          <text class="detail-value">¥{{result.afterEarlyPayment.reducedMonthly}}</text>
+        </view>
+
+        <view class="detail-item">
+          <text class="detail-label">剩余贷款本金</text>
+          <text class="detail-value">¥{{result.afterEarlyPayment.newPrincipal}}万</text>
+        </view>
+      </view>
+
+      <!-- 建议 -->
+      <view class="suggestion-box">
+        <text class="suggestion-icon">💡</text>
+        <view class="suggestion-content">
+          <view class="suggestion-text" wx:if="{{result.type === '缩短年限'}}">
+            选择缩短年限方式，能节省 ¥{{result.afterEarlyPayment.savedInterest}} 利息，
+            提前 {{savedYears}}年{{savedMonths}}个月 还清贷款！
+          </view>
+          <view class="suggestion-text" wx:if="{{result.type === '减少月供'}}">
+            选择减少月供方式，每月少还 ¥{{result.afterEarlyPayment.reducedMonthly}}，
+            能节省 ¥{{result.afterEarlyPayment.savedInterest}} 利息，减轻月供压力！
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 详细数据对比表 -->
+    <view class="comparison-table">
+      <view class="table-title">📋 详细对比</view>
+
+      <view class="table-container">
+        <!-- 表头 -->
+        <view class="table-header">
+          <view class="th th-label">对比项</view>
+          <view class="th th-value">原贷款</view>
+          <view class="th th-value">提前还款后</view>
+        </view>
+
+        <!-- 表格内容 -->
+        <view class="table-body">
+          <view class="table-row">
+            <view class="td td-label">贷款本金</view>
+            <view class="td td-value">¥{{result.original.principal}}万</view>
+            <view class="td td-value">¥{{result.afterEarlyPayment.newPrincipal}}万</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">月供金额</view>
+            <view class="td td-value">¥{{result.original.monthlyPayment}}</view>
+            <view class="td td-value" wx:if="{{result.type === '缩短年限'}}">¥{{result.afterEarlyPayment.monthlyPayment}}</view>
+            <view class="td td-value success" wx:if="{{result.type === '减少月供'}}">¥{{result.afterEarlyPayment.monthlyPayment}}</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">还款年限</view>
+            <view class="td td-value">{{result.original.years}}年</view>
+            <view class="td td-value success" wx:if="{{result.type === '缩短年限'}}">{{result.afterEarlyPayment.newYears}}年</view>
+            <view class="td td-value" wx:if="{{result.type === '减少月供'}}">{{result.afterEarlyPayment.newYears}}年</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">支付总利息</view>
+            <view class="td td-value warning">¥{{result.original.totalInterest}}</view>
+            <view class="td td-value success">¥{{result.afterEarlyPayment.newTotalInterest}}</view>
+          </view>
+
+          <view class="table-row highlight">
+            <view class="td td-label">节省利息</view>
+            <view class="td td-value">-</view>
+            <view class="td td-value success">¥{{result.afterEarlyPayment.savedInterest}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!result}}">
+    <text class="empty-icon">💰</text>
+    <text class="empty-text">输入贷款信息和提前还款金额\n计算能节省多少利息</text>
+  </view>
+
+</view>

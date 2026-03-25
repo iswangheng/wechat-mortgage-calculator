@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/onboarding/onboarding",
+    "pages/index/index",
+    "pages/result/result",
+    "pages/compare/compare",
+    "pages/early-repayment/early-repayment",
+    "pages/history/history",
+    "pages/city-select/city-select",
+    "pages/lpr/lpr",
+    "pages/privacy/privacy",
+    "pages/agreement/agreement"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1677ff",
+    "navigationBarTitleText": "房贷计算器 2026",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#1677ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "房贷计算",
+        "iconPath": "assets/icons/calculator.png",
+        "selectedIconPath": "assets/icons/calculator-active.png"
+      },
+      {
+        "pagePath": "pages/compare/compare",
+        "text": "还款对比",
+        "iconPath": "assets/icons/compare.png",
+        "selectedIconPath": "assets/icons/compare-active.png"
+      },
+      {
+        "pagePath": "pages/early-repayment/early-repayment",
+        "text": "提前还款",
+        "iconPath": "assets/icons/early.png",
+        "selectedIconPath": "assets/icons/early-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

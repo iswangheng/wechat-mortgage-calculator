@@ -1,0 +1,128 @@
+<!-- LPR rate tracking page -->
+<view class="container">
+
+  <!-- Current LPR rate card -->
+  <view class="lpr-card">
+    <view class="lpr-card-title">当前LPR利率</view>
+    <view class="lpr-rates">
+      <view class="rate-item">
+        <text class="rate-label">1年期LPR</text>
+        <text class="rate-value">{{oneYearLpr}}%</text>
+      </view>
+      <view class="rate-divider"></view>
+      <view class="rate-item highlight">
+        <text class="rate-label">5年期以上LPR</text>
+        <text class="rate-value">{{fiveYearLpr}}%</text>
+        <text class="rate-tag">房贷基准</text>
+      </view>
+    </view>
+    <view class="lpr-meta">
+      <text class="meta-item">最近更新: {{lastUpdate}}</text>
+      <text class="meta-item">数据来源: {{dataSource}}</text>
+    </view>
+  </view>
+
+  <!-- LPR trend chart -->
+  <view class="chart-card">
+    <view class="chart-title">LPR历史走势</view>
+    <canvas type="2d" id="lprChart" class="lpr-chart-canvas"></canvas>
+  </view>
+
+  <!-- LPR adjustment timeline -->
+  <view class="timeline-card">
+    <view class="timeline-title">LPR调整记录</view>
+    <view class="timeline-list">
+      <view
+        class="timeline-item"
+        wx:for="{{adjustments}}"
+        wx:key="date">
+        <view class="timeline-dot {{item.direction}}"></view>
+        <view class="timeline-line" wx:if="{{index < adjustments.length - 1}}"></view>
+        <view class="timeline-content">
+          <view class="timeline-header">
+            <text class="timeline-date">{{item.date}}</text>
+            <text class="timeline-change {{item.direction}}">{{item.change}}</text>
+          </view>
+          <text class="timeline-detail">{{item.detail}}</text>
+          <text class="timeline-impact">{{item.impact}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Monthly payment impact simulator -->
+  <view class="simulator-card">
+    <view class="simulator-title">月供影响模拟器</view>
+    <view class="simulator-desc">模拟LPR变化对月供的影响</view>
+
+    <!-- Loan amount input -->
+    <view class="sim-input-group">
+      <text class="sim-label">贷款金额</text>
+      <view class="sim-input-wrap">
+        <input
+          type="digit"
+          value="{{loanAmount}}"
+          bindinput="onLoanAmountInput"
+          class="sim-input"/>
+        <text class="sim-unit">万元</text>
+      </view>
+    </view>
+
+    <!-- Loan years selector -->
+    <view class="sim-input-group">
+      <text class="sim-label">贷款年限</text>
+      <view class="sim-years">
+        <view
+          class="sim-year-item {{loanYears === 10 ? 'active' : ''}}"
+          bindtap="onLoanYearsChange"
+          data-years="10">10年</view>
+        <view
+          class="sim-year-item {{loanYears === 20 ? 'active' : ''}}"
+          bindtap="onLoanYearsChange"
+          data-years="20">20年</view>
+        <view
+          class="sim-year-item {{loanYears === 25 ? 'active' : ''}}"
+          bindtap="onLoanYearsChange"
+          data-years="25">25年</view>
+        <view
+          class="sim-year-item {{loanYears === 30 ? 'active' : ''}}"
+          bindtap="onLoanYearsChange"
+          data-years="30">30年</view>
+      </view>
+    </view>
+
+    <!-- Results table -->
+    <view class="sim-results">
+      <view class="sim-result-row header">
+        <text class="sim-col">利率场景</text>
+        <text class="sim-col">月供(元)</text>
+        <text class="sim-col">月供变化</text>
+      </view>
+      <view class="sim-result-row current">
+        <text class="sim-col">当前 {{fiveYearLpr}}%</text>
+        <text class="sim-col bold">{{currentMonthly}}</text>
+        <text class="sim-col">-</text>
+      </view>
+      <view class="sim-result-row">
+        <text class="sim-col">降10BP {{fiveYearLpr - 0.1}}%</text>
+        <text class="sim-col">{{down10Monthly}}</text>
+        <text class="sim-col save">-{{down10Save}}</text>
+      </view>
+      <view class="sim-result-row">
+        <text class="sim-col">降20BP {{fiveYearLpr - 0.2}}%</text>
+        <text class="sim-col">{{down20Monthly}}</text>
+        <text class="sim-col save">-{{down20Save}}</text>
+      </view>
+    </view>
+
+    <view class="sim-tip">
+      * BP即基点，1BP = 0.01%，以等额本息方式计算
+    </view>
+  </view>
+
+  <!-- Disclaimer -->
+  <view class="disclaimer">
+    以上数据仅供参考，实际利率以贷款银行执行利率为准
+  </view>
+
+</view>

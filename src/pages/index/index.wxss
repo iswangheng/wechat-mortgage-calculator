@@ -1,0 +1,540 @@
+/* 房贷计算器主页面样式 */
+
+/* ========== 数据更新时间横幅 ========== */
+.data-freshness-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.freshness-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.freshness-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.freshness-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  opacity: 0.95;
+  margin-right: 12rpx;
+}
+
+.freshness-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.freshness-tag.fresh {
+  background-color: rgba(76, 217, 100, 0.3);
+  border: 1rpx solid rgba(76, 217, 100, 0.6);
+}
+
+.freshness-tag.warning {
+  background-color: rgba(255, 204, 0, 0.3);
+  border: 1rpx solid rgba(255, 204, 0, 0.6);
+}
+
+.freshness-tag.outdated {
+  background-color: rgba(255, 59, 48, 0.3);
+  border: 1rpx solid rgba(255, 59, 48, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.data-source-btn {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  margin-left: 20rpx;
+}
+
+.source-icon {
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+
+.source-text {
+  font-size: 22rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ========== 容器 ========== */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding-bottom: 40rpx;
+}
+
+/* ========== 分区样式 ========== */
+.section {
+  margin: 30rpx 30rpx 0;
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== 城市选择 ========== */
+.city-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+
+.city-selector {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+}
+
+.city-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-right: 16rpx;
+}
+
+.city-level {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20rpx;
+  margin-right: auto;
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.city-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.info-item {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+/* ========== 贷款类型 ========== */
+.loan-type-tabs {
+  display: flex;
+  gap: 20rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #666666;
+  background: #f5f7fa;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  color: #667eea;
+  background: #eef2ff;
+  border-color: #667eea;
+  font-weight: bold;
+}
+
+/* ========== 输入框 ========== */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  padding: 24rpx 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #666666;
+  margin-right: 20rpx;
+  white-space: nowrap;
+}
+
+.input-number {
+  flex: 1;
+  font-size: 32rpx;
+  color: #333333;
+  text-align: right;
+}
+
+.unit {
+  font-size: 28rpx;
+  color: #999999;
+  margin-left: 16rpx;
+}
+
+/* ========== Quick Templates ========== */
+.quick-templates-section {
+  background: #ffffff;
+}
+
+.templates-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.template-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 12rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  border: 2rpx solid #e9ecef;
+  transition: all 0.3s;
+}
+
+.template-card:active {
+  background: #eef2ff;
+  border-color: #667eea;
+}
+
+.template-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+}
+
+.template-desc {
+  font-size: 20rpx;
+  color: #999999;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ========== Input Validation ========== */
+.input-hint {
+  display: block;
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 10rpx;
+  padding-left: 4rpx;
+}
+
+.input-hint.hint-error {
+  color: #e53935;
+}
+
+.input-group.input-error {
+  border-color: #e53935;
+}
+
+/* ========== 按钮组 ========== */
+.btn-group {
+  display: flex;
+  gap: 20rpx;
+  margin: 40rpx 30rpx 0;
+}
+
+.btn-calculate {
+  flex: 2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 28rpx 0;
+  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.4);
+}
+
+.btn-reset {
+  flex: 1;
+  background: #f5f7fa;
+  color: #666666;
+  font-size: 28rpx;
+  border-radius: 16rpx;
+  padding: 28rpx 0;
+}
+
+/* ========== 结果展示 ========== */
+.result-section {
+  margin: 30rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+}
+
+.result-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.result-item.highlight {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  padding: 28rpx 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  border: none;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.result-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.result-item.highlight .result-value {
+  font-size: 40rpx;
+  color: #667eea;
+}
+
+.btn-detail {
+  margin-top: 30rpx;
+  background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+}
+
+/* ========== 其他样式 ========== */
+.house-type-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.selector-item {
+  display: flex;
+  align-items: center;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.radio-label radio {
+  margin-right: 12rpx;
+}
+
+.down-payment-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.info-text {
+  font-size: 26rpx;
+  color: #667eea;
+  font-weight: 500;
+}
+
+.fund-tip {
+  margin-top: 16rpx;
+  padding: 16rpx 20rpx;
+  background: #fff3e0;
+  border-radius: 12rpx;
+  border-left: 4rpx solid #ffa726;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #f57c00;
+}
+
+.year-selector {
+  display: flex;
+  gap: 20rpx;
+}
+
+.year-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #666666;
+  background: #f5f7fa;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.year-item.active {
+  color: #667eea;
+  background: #eef2ff;
+  border-color: #667eea;
+  font-weight: bold;
+}
+
+.method-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.method-label radio {
+  margin-right: 16rpx;
+}
+
+.method-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.method-name {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.method-desc {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.safety-line {
+  margin-top: 30rpx;
+  padding: 24rpx;
+  background: #e8f5e9;
+  border-radius: 16rpx;
+  border-left: 4rpx solid #4caf50;
+}
+
+.safety-title {
+  font-size: 28rpx;
+  color: #2e7d32;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.safety-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.safety-item {
+  font-size: 26rpx;
+  color: #388e3c;
+}
+
+.safety-status {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 500;
+}
+
+.safety-status.safe {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+.safety-status.warning {
+  background: #fff9c4;
+  color: #f57f17;
+}
+
+.safety-status.danger {
+  background: #ffcdd2;
+  color: #c62828;
+}
+
+/* ========== History entry button ========== */
+.history-entry {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 30rpx 0;
+  padding: 24rpx 30rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.history-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.history-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.history-arrow {
+  font-size: 28rpx;
+  color: #cccccc;
+}

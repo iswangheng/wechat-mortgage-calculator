@@ -1,0 +1,397 @@
+/* 还款明细页面样式 */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20rpx 30rpx 40rpx;
+}
+
+/* 贷款信息摘要 */
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.summary-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.summary-item {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20rpx;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.summary-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.summary-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* 还款总览 */
+.overview-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.overview-item.main {
+  flex: 1;
+}
+
+.overview-divider {
+  width: 2rpx;
+  height: 80rpx;
+  background: #e9ecef;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.overview-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.overview-value.primary {
+  font-size: 40rpx;
+  color: #667eea;
+}
+
+.overview-value.warning {
+  color: #f5576c;
+}
+
+/* 月供信息 */
+.payment-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.payment-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 24rpx;
+}
+
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.payment-item.highlight {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border: 2rpx solid #667eea;
+}
+
+.payment-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.payment-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.payment-tip {
+  padding: 16rpx 20rpx;
+  background: #fff8e1;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #f57c00;
+  margin-top: 16rpx;
+  border-left: 4rpx solid #ffa726;
+}
+
+/* Chart section */
+.chart-section {
+  margin-bottom: 20rpx;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.chart-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.chart-canvas {
+  width: 100%;
+  display: block;
+}
+
+.chart-pie {
+  height: 500rpx;
+}
+
+.chart-line {
+  height: 480rpx;
+}
+
+.chart-bar {
+  height: 480rpx;
+}
+
+/* 还款计划 */
+.schedule-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.schedule-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.schedule-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 20rpx;
+}
+
+.toggle-text {
+  font-size: 24rpx;
+  color: #667eea;
+}
+
+.toggle-icon {
+  font-size: 20rpx;
+  color: #667eea;
+}
+
+/* 表格样式 */
+.table-header {
+  display: flex;
+  padding: 16rpx 10rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx 12rpx 0 0;
+  border-bottom: 2rpx solid #e9ecef;
+}
+
+.col {
+  font-size: 24rpx;
+  text-align: center;
+  color: #666666;
+  font-weight: bold;
+}
+
+.col-period {
+  flex: 0 0 80rpx;
+}
+
+.col-payment {
+  flex: 1;
+}
+
+.col-principal {
+  flex: 1;
+}
+
+.col-interest {
+  flex: 1;
+}
+
+.col-balance {
+  flex: 1;
+}
+
+.schedule-list {
+  background: #f8f9fa;
+  border-radius: 0 0 12rpx 12rpx;
+}
+
+.schedule-row {
+  display: flex;
+  padding: 20rpx 10rpx;
+  border-bottom: 1rpx solid #e9ecef;
+  transition: background 0.2s;
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-row:active {
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.schedule-row.first {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.schedule-row .col {
+  font-size: 24rpx;
+  color: #333333;
+  font-weight: normal;
+}
+
+.schedule-row.first .col {
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* 底部统计 */
+.schedule-footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 24rpx 30rpx;
+  background: #f8f9fa;
+  border-radius: 0 0 12rpx 12rpx;
+  margin-top: 20rpx;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.footer-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.footer-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  border: none;
+}
+
+.btn-secondary {
+  flex: 1;
+  background: #f5f7fa;
+  color: #667eea;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  border: 2rpx solid #667eea;
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+  border: none;
+}
+
+/* Save image button */
+.save-image-section {
+  margin-top: 20rpx;
+}
+
+.btn-save-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  border: none;
+}
+
+.btn-save-image::after {
+  border: none;
+}
+
+.save-icon {
+  font-size: 32rpx;
+}
+
+/* Off-screen share canvas (hidden) */
+.share-canvas {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+}

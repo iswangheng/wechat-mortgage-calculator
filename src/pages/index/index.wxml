@@ -1,0 +1,311 @@
+<!-- 房贷计算器主页面 -->
+<view class="container">
+
+  <!-- 数据更新时间提示 -->
+  <view class="data-freshness-banner">
+    <view class="freshness-content">
+      <text class="freshness-icon">📅</text>
+      <text class="freshness-text">数据更新于: {{dataUpdateTime}}</text>
+      <text class="freshness-tag {{dataFreshness.status}}">{{dataFreshness.label}}</text>
+    </view>
+    <view class="data-source-btn" bindtap="onShowDataSource">
+      <text class="source-icon">ℹ️</text>
+      <text class="source-text">数据来源</text>
+    </view>
+  </view>
+
+  <!-- 城市选择 -->
+  <view class="section city-section">
+    <view class="section-title">📍 选择城市</view>
+    <view class="city-selector" bindtap="onCitySelect">
+      <text class="city-name">{{cityName}}</text>
+      <text class="city-level">{{cityLevel}}</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="city-info" wx:if="{{cityInfo}}">
+      <text class="info-item">公积金最高: {{cityInfo.fundLimit}}万</text>
+      <text class="info-item" wx:if="{{cityInfo.purchaseRestriction}}">🔒 限购城市</text>
+      <text class="info-item" wx:else>✅ 不限购</text>
+    </view>
+  </view>
+
+  <!-- 快捷方案 -->
+  <view class="section quick-templates-section">
+    <view class="section-title">⚡ 快捷方案</view>
+    <view class="templates-row">
+      <view
+        class="template-card"
+        wx:for="{{quickTemplates}}"
+        wx:key="name"
+        bindtap="onApplyTemplate"
+        data-index="{{index}}">
+        <text class="template-name">{{item.name}}</text>
+        <text class="template-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 贷款类型选择 -->
+  <view class="section">
+    <view class="section-title">💰 贷款类型</view>
+    <view class="loan-type-tabs">
+      <view
+        class="tab {{loanType === 'commercial' ? 'active' : ''}}"
+        bindtap="onLoanTypeChange"
+        data-type="commercial">
+        商业贷款
+      </view>
+      <view
+        class="tab {{loanType === 'fund' ? 'active' : ''}}"
+        bindtap="onLoanTypeChange"
+        data-type="fund">
+        公积金贷款
+      </view>
+      <view
+        class="tab {{loanType === 'combination' ? 'active' : ''}}"
+        bindtap="onLoanTypeChange"
+        data-type="combination">
+        组合贷款
+      </view>
+    </view>
+  </view>
+
+  <!-- 房屋总价 -->
+  <view class="section">
+    <view class="section-title">🏠 房屋总价</view>
+    <view class="input-group {{errors.housePrice ? 'input-error' : ''}}">
+      <input
+        type="digit"
+        placeholder="请输入房屋总价"
+        value="{{housePrice}}"
+        bindinput="onHousePriceInput"
+        class="input-number"/>
+      <text class="unit">万元</text>
+    </view>
+    <text class="input-hint {{errors.housePrice ? 'hint-error' : ''}}">{{errors.housePrice || '有效范围: 10 - 10000万'}}</text>
+  </view>
+
+  <!-- 首付比例 -->
+  <view class="section">
+    <view class="section-title">💵 首付比例</view>
+    <view class="house-type-selector">
+      <view class="selector-item">
+        <radio-group bindchange="onHouseNumberChange">
+          <label class="radio-label">
+            <radio value="first" checked="{{houseNumber === 'first'}}"/>
+            <text>首套</text>
+          </label>
+          <label class="radio-label">
+            <radio value="second" checked="{{houseNumber === 'second'}}"/>
+            <text>二套</text>
+          </label>
+        </radio-group>
+      </view>
+      <view class="selector-item">
+        <radio-group bindchange="onHouseTypeChange">
+          <label class="radio-label">
+            <radio value="ordinary" checked="{{houseType === 'ordinary'}}"/>
+            <text>普通住宅</text>
+          </label>
+          <label class="radio-label">
+            <radio value="nonOrdinary" checked="{{houseType === 'nonOrdinary'}}"/>
+            <text>非普通住宅</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class="down-payment-info">
+      <text class="info-text">最低首付: {{downPaymentRatio}}%</text>
+      <text class="info-text">首付金额: {{downPaymentAmount}}万</text>
+    </view>
+  </view>
+
+  <!-- 商业贷款 -->
+  <view class="section" wx:if="{{loanType === 'commercial' || loanType === 'combination'}}">
+    <view class="section-title">🏦 商业贷款</view>
+    <view class="input-group">
+      <text class="label">贷款金额</text>
+      <input
+        type="digit"
+        placeholder="请输入贷款金额"
+        value="{{commercialPrincipal}}"
+        bindinput="onCommercialPrincipalInput"
+        class="input-number"/>
+      <text class="unit">万元</text>
+    </view>
+    <view class="input-group {{errors.commercialRate ? 'input-error' : ''}}">
+      <text class="label">贷款利率</text>
+      <input
+        type="digit"
+        placeholder="当前LPR 3.95%"
+        value="{{commercialRate}}"
+        bindinput="onCommercialRateInput"
+        class="input-number"/>
+      <text class="unit">%</text>
+    </view>
+    <text class="input-hint {{errors.commercialRate ? 'hint-error' : ''}}">{{errors.commercialRate || '有效范围: 0.1% - 24%'}}</text>
+  </view>
+
+  <!-- 公积金贷款 -->
+  <view class="section" wx:if="{{loanType === 'fund' || loanType === 'combination'}}">
+    <view class="section-title">🏡 公积金贷款</view>
+    <view class="input-group">
+      <text class="label">贷款金额</text>
+      <input
+        type="digit"
+        placeholder="最高{{maxFundLimit}}万"
+        value="{{fundPrincipal}}"
+        bindinput="onFundPrincipalInput"
+        class="input-number"/>
+      <text class="unit">万元</text>
+    </view>
+    <view class="input-group {{errors.fundRate ? 'input-error' : ''}}">
+      <text class="label">贷款利率</text>
+      <input
+        type="digit"
+        placeholder="公积金利率 2.6%"
+        value="{{fundRate}}"
+        bindinput="onFundRateInput"
+        class="input-number"/>
+      <text class="unit">%</text>
+    </view>
+    <text class="input-hint {{errors.fundRate ? 'hint-error' : ''}}">{{errors.fundRate || '有效范围: 0.1% - 24%'}}</text>
+    <view class="fund-tip" wx:if="{{fundPrincipal > maxFundLimit}}">
+      <text class="tip-text">⚠️ 超过{{cityName}}公积金最高额度 {{maxFundLimit}}万</text>
+    </view>
+  </view>
+
+  <!-- 贷款年限 -->
+  <view class="section">
+    <view class="section-title">⏰ 贷款年限</view>
+    <view class="year-selector">
+      <view
+        class="year-item {{years === 10 ? 'active' : ''}}"
+        bindtap="onYearsChange"
+        data-years="10">
+        10年
+      </view>
+      <view
+        class="year-item {{years === 20 ? 'active' : ''}}"
+        bindtap="onYearsChange"
+        data-years="20">
+        20年
+      </view>
+      <view
+        class="year-item {{years === 25 ? 'active' : ''}}"
+        bindtap="onYearsChange"
+        data-years="25">
+        25年
+      </view>
+      <view
+        class="year-item {{years === 30 ? 'active' : ''}}"
+        bindtap="onYearsChange"
+        data-years="30">
+        30年
+      </view>
+    </view>
+  </view>
+
+  <!-- 还款方式 -->
+  <view class="section">
+    <view class="section-title">📊 还款方式</view>
+    <radio-group bindchange="onMethodChange">
+      <label class="method-label">
+        <radio value="等额本息" checked="{{method === '等额本息'}}"/>
+        <view class="method-content">
+          <text class="method-name">等额本息</text>
+          <text class="method-desc">每月还一样多 💰💰💰</text>
+        </view>
+      </label>
+      <label class="method-label">
+        <radio value="等额本金" checked="{{method === '等额本金'}}"/>
+        <view class="method-content">
+          <text class="method-name">等额本金</text>
+          <text class="method-desc">前期还得多，越还越少 💰💰💰 → 💰</text>
+        </view>
+      </label>
+    </radio-group>
+  </view>
+
+  <!-- 计算按钮 -->
+  <view class="btn-group">
+    <button class="btn-calculate" bindtap="onCalculate">开始计算</button>
+    <button class="btn-reset" bindtap="onReset">重置</button>
+  </view>
+
+  <!-- LPR利率入口 -->
+  <view class="history-entry" bindtap="onGoLpr">
+    <text class="history-icon">📈</text>
+    <text class="history-text">LPR利率追踪</text>
+    <text class="history-arrow">></text>
+  </view>
+
+  <!-- 历史记录入口 -->
+  <view class="history-entry" bindtap="onGoHistory">
+    <text class="history-icon">📋</text>
+    <text class="history-text">查看历史记录</text>
+    <text class="history-arrow">></text>
+  </view>
+
+  <!-- 结果展示 -->
+  <view class="result-section" wx:if="{{result}}">
+    <view class="result-title">📈 计算结果</view>
+
+    <!-- 等额本息结果 -->
+    <view wx:if="{{method === '等额本息'}}">
+      <view class="result-item highlight">
+        <text class="result-label">月供金额</text>
+        <text class="result-value">¥{{result.monthlyPayment}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">贷款总额</text>
+        <text class="result-value">¥{{result.principal}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">支付利息</text>
+        <text class="result-value">¥{{result.totalInterest}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">还款总额</text>
+        <text class="result-value">¥{{result.totalPayment}}</text>
+      </view>
+    </view>
+
+    <!-- 等额本金结果 -->
+    <view wx:if="{{method === '等额本金'}}">
+      <view class="result-item highlight">
+        <text class="result-label">首月月供</text>
+        <text class="result-value">¥{{result.firstMonthPayment}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">末月月供</text>
+        <text class="result-value">¥{{result.lastMonthPayment}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">贷款总额</text>
+        <text class="result-value">¥{{result.principal}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">支付利息</text>
+        <text class="result-value">¥{{result.totalInterest}}</text>
+      </view>
+      <view class="result-item">
+        <text class="result-label">还款总额</text>
+        <text class="result-value">¥{{result.totalPayment}}</text>
+      </view>
+    </view>
+
+    <!-- 月供安全线 -->
+    <view class="safety-line" wx:if="{{safetyLine}}">
+      <view class="safety-title">💡 月供安全线</view>
+      <view class="safety-content">
+        <text class="safety-item">建议家庭月收入: ¥{{safetyLine.comfortable}}</text>
+        <text class="safety-status {{safetyLine.suggestion}}">{{safetyLine.suggestion}}</text>
+      </view>
+    </view>
+
+    <!-- 查看详情按钮 -->
+    <button class="btn-detail" bindtap="onViewDetail">查看还款明细</button>
+  </view>
+
+</view>

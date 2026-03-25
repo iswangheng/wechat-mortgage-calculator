@@ -1,0 +1,366 @@
+/* LPR rate tracking page styles */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20rpx 30rpx 40rpx;
+}
+
+/* ========== Current LPR card ========== */
+.lpr-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.lpr-card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.lpr-rates {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16rpx;
+  padding: 24rpx 20rpx;
+}
+
+.rate-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.rate-item.highlight {
+  position: relative;
+}
+
+.rate-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.rate-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.rate-tag {
+  font-size: 20rpx;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.rate-divider {
+  width: 2rpx;
+  height: 80rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lpr-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-item {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ========== Chart card ========== */
+.chart-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.chart-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.lpr-chart-canvas {
+  width: 100%;
+  height: 480rpx;
+}
+
+/* ========== Timeline card ========== */
+.timeline-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.timeline-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 24rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.timeline-list {
+  padding-left: 20rpx;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 40rpx;
+  padding-bottom: 30rpx;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 8rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #667eea;
+  border: 4rpx solid #eef2ff;
+  z-index: 1;
+}
+
+.timeline-dot.down {
+  background: #4caf50;
+  border-color: #e8f5e9;
+}
+
+.timeline-dot.flat {
+  background: #999999;
+  border-color: #f5f5f5;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 8rpx;
+  top: 28rpx;
+  width: 4rpx;
+  bottom: 0;
+  background: #e9ecef;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.timeline-date {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.timeline-change {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+}
+
+.timeline-change.down {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.timeline-change.flat {
+  background: #f5f5f5;
+  color: #999999;
+}
+
+.timeline-detail {
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 1.5;
+}
+
+.timeline-impact {
+  font-size: 22rpx;
+  color: #f59e0b;
+  background: #fff8e1;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+}
+
+/* ========== Simulator card ========== */
+.simulator-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.simulator-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.simulator-desc {
+  font-size: 24rpx;
+  color: #999999;
+  margin-bottom: 24rpx;
+  padding-left: 16rpx;
+}
+
+.sim-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.sim-label {
+  font-size: 28rpx;
+  color: #666666;
+  width: 160rpx;
+  flex-shrink: 0;
+}
+
+.sim-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+.sim-input {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333333;
+  text-align: right;
+}
+
+.sim-unit {
+  font-size: 26rpx;
+  color: #999999;
+  margin-left: 12rpx;
+}
+
+.sim-years {
+  flex: 1;
+  display: flex;
+  gap: 12rpx;
+}
+
+.sim-year-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #666666;
+  background: #f5f7fa;
+  border: 2rpx solid transparent;
+}
+
+.sim-year-item.active {
+  color: #667eea;
+  background: #eef2ff;
+  border-color: #667eea;
+  font-weight: bold;
+}
+
+/* Simulator results table */
+.sim-results {
+  margin-top: 24rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 2rpx solid #e9ecef;
+}
+
+.sim-result-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 16rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.sim-result-row:last-child {
+  border-bottom: none;
+}
+
+.sim-result-row.header {
+  background: #f8f9fa;
+}
+
+.sim-result-row.header .sim-col {
+  font-weight: bold;
+  color: #666666;
+  font-size: 24rpx;
+}
+
+.sim-result-row.current {
+  background: rgba(102, 126, 234, 0.06);
+}
+
+.sim-col {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: #333333;
+}
+
+.sim-col.bold {
+  font-weight: bold;
+  color: #667eea;
+}
+
+.sim-col.save {
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.sim-tip {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: #999999;
+}
+
+/* ========== Disclaimer ========== */
+.disclaimer {
+  text-align: center;
+  font-size: 22rpx;
+  color: #999999;
+  padding: 20rpx 0;
+}

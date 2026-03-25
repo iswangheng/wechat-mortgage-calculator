@@ -1,0 +1,70 @@
+<!-- Onboarding guide page -->
+<view class="onboarding-container">
+  <!-- Skip button -->
+  <view class="skip-btn" bindtap="onSkip" wx:if="{{currentIndex < 2}}">
+    <text>跳过</text>
+  </view>
+
+  <!-- Swiper slides -->
+  <swiper
+    class="onboarding-swiper"
+    current="{{currentIndex}}"
+    bindchange="onSwiperChange"
+    duration="300"
+    circular="{{false}}"
+  >
+    <!-- Step 1: Precise calculation -->
+    <swiper-item>
+      <view class="slide-content">
+        <view class="icon-wrapper">
+          <view class="icon-circle">
+            <text class="icon-text">🏠</text>
+          </view>
+        </view>
+        <view class="slide-title">精准计算</view>
+        <view class="slide-desc">支持商贷、公积金、组合贷</view>
+        <view class="slide-desc">覆盖全国304个城市</view>
+      </view>
+    </swiper-item>
+
+    <!-- Step 2: Smart comparison -->
+    <swiper-item>
+      <view class="slide-content">
+        <view class="icon-wrapper">
+          <view class="icon-circle">
+            <text class="icon-text">📊</text>
+          </view>
+        </view>
+        <view class="slide-title">智能对比</view>
+        <view class="slide-desc">等额本息 vs 等额本金</view>
+        <view class="slide-desc">提前还款模拟，多方案对比</view>
+      </view>
+    </swiper-item>
+
+    <!-- Step 3: Get started -->
+    <swiper-item>
+      <view class="slide-content">
+        <view class="icon-wrapper">
+          <view class="icon-circle icon-circle-start">
+            <text class="icon-text">🚀</text>
+          </view>
+        </view>
+        <view class="slide-title">开始使用</view>
+        <view class="slide-desc">轻松掌握房贷信息</view>
+        <view class="slide-desc">做出最优还款决策</view>
+        <view class="start-btn" bindtap="onStart">
+          <text>立即开始</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- Dot indicators -->
+  <view class="dot-indicators">
+    <view
+      class="dot {{currentIndex === index ? 'dot-active' : ''}}"
+      wx:for="{{steps}}"
+      wx:key="index"
+    ></view>
+  </view>
+</view>

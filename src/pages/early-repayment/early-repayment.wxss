@@ -1,0 +1,495 @@
+/* 提前还款计算页面样式 */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20rpx 30rpx 40rpx;
+}
+
+/* 输入区域 */
+.input-section {
+  margin-bottom: 30rpx;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30rpx;
+}
+
+/* 输入组 */
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-group:last-child {
+  margin-bottom: 0;
+}
+
+.input-label {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.input-row:focus-within {
+  border-color: #667eea;
+  background: #ffffff;
+}
+
+.input-field {
+  flex: 1;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.input-unit {
+  font-size: 28rpx;
+  color: #999999;
+  margin-left: 12rpx;
+}
+
+.input-tip {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #999999;
+  padding-left: 24rpx;
+}
+
+/* 年限选择器 */
+.years-selector {
+  display: flex;
+  gap: 16rpx;
+}
+
+.year-item {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  background: #f5f7fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666666;
+  transition: all 0.3s;
+}
+
+.year-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 还款方式选择器 */
+.method-selector {
+  display: flex;
+  gap: 16rpx;
+}
+
+.method-item {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  background: #f5f7fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666666;
+  transition: all 0.3s;
+}
+
+.method-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 还款后处理方式选择器 */
+.after-method-selector {
+  display: flex;
+  gap: 20rpx;
+}
+
+.after-method-item {
+  flex: 1;
+  padding: 30rpx 20rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.after-method-item.active {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-color: #667eea;
+}
+
+.method-icon {
+  font-size: 48rpx;
+  margin-bottom: 8rpx;
+}
+
+.method-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.after-method-item.active .method-name {
+  color: #667eea;
+}
+
+.method-desc {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn-reset {
+  flex: 1;
+  background: #f5f7fa;
+  color: #667eea;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  border: 2rpx solid #667eea;
+}
+
+.btn-calculate {
+  flex: 2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  border: none;
+}
+
+.btn-reset::after,
+.btn-calculate::after {
+  border: none;
+}
+
+/* 结果区域 */
+.result-section {
+  margin-top: 30rpx;
+}
+
+/* 对比总览卡片 */
+.overview-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.overview-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30rpx;
+}
+
+.overview-comparison {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.comparison-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.column-label {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 8rpx;
+}
+
+.column-label.highlight {
+  color: #667eea;
+}
+
+.comparison-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  font-size: 48rpx;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.data-item {
+  padding: 16rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.data-label {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.data-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.data-value.warning {
+  color: #f5576c;
+}
+
+.data-value.success {
+  color: #20c997;
+}
+
+/* 节省详情卡片 */
+.savings-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.savings-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.savings-highlight {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 30rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.highlight-label {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12rpx;
+}
+
+.highlight-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.savings-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.detail-item {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20rpx;
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-label {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.detail-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* 建议框 */
+.suggestion-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 24rpx;
+  border-radius: 12rpx;
+  display: flex;
+  gap: 12rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.suggestion-icon {
+  font-size: 36rpx;
+  flex-shrink: 0;
+}
+
+.suggestion-content {
+  flex: 1;
+}
+
+.suggestion-text {
+  font-size: 26rpx;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* 对比表格 */
+.comparison-table {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.table-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 24rpx;
+}
+
+.table-container {
+  overflow: hidden;
+  border-radius: 12rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+/* 表头 */
+.table-header {
+  display: flex;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20rpx 0;
+}
+
+.th {
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.th-label {
+  flex: 1;
+}
+
+.th-value {
+  flex: 1.2;
+}
+
+/* 表格内容 */
+.table-body {
+  background: #ffffff;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #e9ecef;
+  padding: 20rpx 0;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row.highlight {
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.td {
+  text-align: center;
+  font-size: 24rpx;
+  color: #333333;
+  padding: 0 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-label {
+  flex: 1;
+  font-weight: bold;
+  color: #666666;
+}
+
+.td-value {
+  flex: 1.2;
+}
+
+.td-value.warning {
+  color: #f5576c;
+  font-weight: bold;
+}
+
+.td-value.success {
+  color: #20c997;
+  font-weight: bold;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 60rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.3;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center;
+  line-height: 1.8;
+  white-space: pre-line;
+}

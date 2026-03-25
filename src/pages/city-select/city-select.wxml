@@ -1,0 +1,45 @@
+<!-- 城市选择页面 -->
+<view class="container">
+  <view class="search-bar">
+    <input
+      type="text"
+      placeholder="搜索城市"
+      value="{{searchKey}}"
+      bindinput="onSearchInput"
+      class="search-input"/>
+  </view>
+
+  <!-- 当前城市 -->
+  <view class="section" wx:if="{{currentCity}}">
+    <view class="section-title">当前城市</view>
+    <view class="city-item current" bindtap="onCityTap" data-city="{{currentCity}}">
+      <text class="city-name">{{currentCity}}</text>
+      <text class="check-icon">✓</text>
+    </view>
+  </view>
+
+  <!-- 城市列表 -->
+  <view class="section" wx:for="{{filteredCities}}" wx:key="level">
+    <view class="section-title">{{item.level}}</view>
+    <view class="city-list">
+      <view
+        class="city-item {{city === currentCity ? 'selected' : ''}}"
+        wx:for="{{item.cities}}"
+        wx:for-item="city"
+        wx:key="*this"
+        bindtap="onCityTap"
+        data-city="{{city}}">
+        <text class="city-name">{{city}}</text>
+        <text class="check-icon" wx:if="{{city === currentCity}}">✓</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他城市 -->
+  <view class="section">
+    <view class="city-item" bindtap="onCityTap" data-city="其他城市">
+      <text class="city-name">其他城市</text>
+      <text class="city-desc">（使用默认配置）</text>
+    </view>
+  </view>
+</view>

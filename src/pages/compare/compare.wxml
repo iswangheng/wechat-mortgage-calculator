@@ -1,0 +1,277 @@
+<!-- 还款方式对比页面 -->
+<view class="container">
+
+  <!-- 输入区域 -->
+  <view class="input-section">
+
+    <!-- 城市选择 -->
+    <view class="input-card">
+      <view class="card-title">📍 选择城市</view>
+      <view class="city-selector" bindtap="onCitySelect">
+        <text class="city-name">{{cityName}}</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 贷款类型选择 -->
+    <view class="input-card">
+      <view class="card-title">🏦 贷款类型</view>
+      <view class="loan-type-tabs">
+        <view
+          class="tab {{loanType === 'commercial' ? 'active' : ''}}"
+          bindtap="onLoanTypeChange"
+          data-type="commercial">
+          商业贷款
+        </view>
+        <view
+          class="tab {{loanType === 'fund' ? 'active' : ''}}"
+          bindtap="onLoanTypeChange"
+          data-type="fund">
+          公积金贷款
+        </view>
+      </view>
+    </view>
+
+    <!-- 贷款金额 -->
+    <view class="input-card">
+      <view class="card-title">💰 贷款金额</view>
+      <view class="input-row">
+        <input
+          class="input-field"
+          type="digit"
+          value="{{principal}}"
+          placeholder="请输入贷款金额"
+          bindinput="onPrincipalInput"
+        />
+        <text class="input-unit">万元</text>
+      </view>
+    </view>
+
+    <!-- 贷款利率 -->
+    <view class="input-card">
+      <view class="card-title">📊 贷款利率</view>
+      <view class="input-row">
+        <input
+          class="input-field"
+          type="digit"
+          value="{{annualRate}}"
+          placeholder="请输入年利率"
+          bindinput="onRateInput"
+        />
+        <text class="input-unit">%</text>
+      </view>
+    </view>
+
+    <!-- 贷款年限 -->
+    <view class="input-card">
+      <view class="card-title">⏱️ 贷款年限</view>
+      <view class="years-selector">
+        <view
+          class="year-item {{years === 10 ? 'active' : ''}}"
+          bindtap="onYearsChange"
+          data-years="10">
+          10年
+        </view>
+        <view
+          class="year-item {{years === 20 ? 'active' : ''}}"
+          bindtap="onYearsChange"
+          data-years="20">
+          20年
+        </view>
+        <view
+          class="year-item {{years === 30 ? 'active' : ''}}"
+          bindtap="onYearsChange"
+          data-years="30">
+          30年
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="btn-reset" bindtap="onReset">重置</button>
+      <button class="btn-compare" bindtap="onCompare">开始对比</button>
+    </view>
+
+  </view>
+
+  <!-- 对比结果 -->
+  <view class="result-section" wx:if="{{comparison}}">
+
+    <!-- 对比卡片 -->
+    <view class="comparison-cards">
+
+      <!-- 等额本息 -->
+      <view class="compare-card left">
+        <view class="card-header">
+          <view class="method-name">{{comparison.equalPayment.name}}</view>
+          <view class="method-desc">{{comparison.equalPayment.description}}</view>
+        </view>
+
+        <view class="card-body">
+          <!-- 月供 -->
+          <view class="data-item highlight">
+            <text class="data-label">每月月供</text>
+            <text class="data-value primary">¥{{comparison.equalPayment.monthlyPayment}}</text>
+          </view>
+
+          <!-- 总利息 -->
+          <view class="data-item">
+            <text class="data-label">支付利息</text>
+            <text class="data-value warning">¥{{comparison.equalPayment.totalInterest}}</text>
+          </view>
+
+          <!-- 总还款 -->
+          <view class="data-item">
+            <text class="data-label">还款总额</text>
+            <text class="data-value">¥{{comparison.equalPayment.totalPayment}}</text>
+          </view>
+
+          <!-- 优缺点 -->
+          <view class="pros-cons">
+            <view class="pros">
+              <view class="section-title">✅ 优点</view>
+              <view class="point" wx:for="{{comparison.equalPayment.pros}}" wx:key="*this">
+                • {{item}}
+              </view>
+            </view>
+            <view class="cons">
+              <view class="section-title">⚠️ 缺点</view>
+              <view class="point" wx:for="{{comparison.equalPayment.cons}}" wx:key="*this">
+                • {{item}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 等额本金 -->
+      <view class="compare-card right">
+        <view class="card-header">
+          <view class="method-name">{{comparison.equalPrincipal.name}}</view>
+          <view class="method-desc">{{comparison.equalPrincipal.description}}</view>
+        </view>
+
+        <view class="card-body">
+          <!-- 首月月供 -->
+          <view class="data-item highlight">
+            <text class="data-label">首月月供</text>
+            <text class="data-value primary">¥{{comparison.equalPrincipal.firstMonthPayment}}</text>
+          </view>
+
+          <!-- 末月月供 -->
+          <view class="data-item">
+            <text class="data-label">末月月供</text>
+            <text class="data-value">¥{{comparison.equalPrincipal.lastMonthPayment}}</text>
+          </view>
+
+          <!-- 总利息 -->
+          <view class="data-item">
+            <text class="data-label">支付利息</text>
+            <text class="data-value success">¥{{comparison.equalPrincipal.totalInterest}}</text>
+          </view>
+
+          <!-- 总还款 -->
+          <view class="data-item">
+            <text class="data-label">还款总额</text>
+            <text class="data-value">¥{{comparison.equalPrincipal.totalPayment}}</text>
+          </view>
+
+          <!-- 优缺点 -->
+          <view class="pros-cons">
+            <view class="pros">
+              <view class="section-title">✅ 优点</view>
+              <view class="point" wx:for="{{comparison.equalPrincipal.pros}}" wx:key="*this">
+                • {{item}}
+              </view>
+            </view>
+            <view class="cons">
+              <view class="section-title">⚠️ 缺点</view>
+              <view class="point" wx:for="{{comparison.equalPrincipal.cons}}" wx:key="*this">
+                • {{item}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 对比总结 -->
+    <view class="comparison-summary">
+      <view class="summary-title">📊 对比总结</view>
+
+      <view class="summary-items">
+        <view class="summary-item">
+          <text class="summary-label">首月月供差异</text>
+          <text class="summary-value">等额本金多还 ¥{{comparison.firstMonthDiff}}</text>
+        </view>
+
+        <view class="summary-item">
+          <text class="summary-label">总利息差异</text>
+          <text class="summary-value highlight">等额本金能省 ¥{{comparison.savedInterest}}</text>
+        </view>
+
+        <view class="recommendation">
+          <text class="recommendation-icon">💡</text>
+          <text class="recommendation-text">{{comparison.recommendation}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 对比表格 -->
+    <view class="comparison-table">
+      <view class="table-title">📋 详细对比</view>
+
+      <view class="table-container">
+        <!-- 表头 -->
+        <view class="table-header">
+          <view class="th th-label">对比项</view>
+          <view class="th th-value">等额本息</view>
+          <view class="th th-value">等额本金</view>
+        </view>
+
+        <!-- 表格内容 -->
+        <view class="table-body">
+          <view class="table-row">
+            <view class="td td-label">月供特点</view>
+            <view class="td td-value">每月相同</view>
+            <view class="td td-value">逐月递减</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">首月月供</view>
+            <view class="td td-value">¥{{comparison.equalPayment.monthlyPayment}}</view>
+            <view class="td td-value">¥{{comparison.equalPrincipal.firstMonthPayment}}</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">总利息</view>
+            <view class="td td-value warning">¥{{comparison.equalPayment.totalInterest}}</view>
+            <view class="td td-value success">¥{{comparison.equalPrincipal.totalInterest}}</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">还款总额</view>
+            <view class="td td-value">¥{{comparison.equalPayment.totalPayment}}</view>
+            <view class="td td-value">¥{{comparison.equalPrincipal.totalPayment}}</view>
+          </view>
+
+          <view class="table-row">
+            <view class="td td-label">适合人群</view>
+            <view class="td td-value">收入稳定</view>
+            <view class="td td-value">收入较高</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!comparison}}">
+    <text class="empty-icon">📊</text>
+    <text class="empty-text">输入贷款信息，开始对比还款方式</text>
+  </view>
+
+</view>

@@ -1,0 +1,165 @@
+<!-- 还款明细页面 -->
+<view class="container">
+
+  <!-- 贷款信息摘要 -->
+  <view class="summary-card">
+    <view class="summary-title">📊 贷款信息摘要</view>
+    <view class="summary-grid">
+      <view class="summary-item">
+        <text class="summary-label">城市</text>
+        <text class="summary-value">{{cityName}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">贷款类型</text>
+        <text class="summary-value">{{loanTypeName}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">还款方式</text>
+        <text class="summary-value">{{method}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">贷款年限</text>
+        <text class="summary-value">{{years}}年</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 还款总览 -->
+  <view class="overview-card">
+    <view class="overview-item main">
+      <text class="overview-label">贷款总额</text>
+      <text class="overview-value primary">¥{{result.principal}}</text>
+    </view>
+    <view class="overview-divider"></view>
+    <view class="overview-item">
+      <text class="overview-label">支付利息</text>
+      <text class="overview-value warning">¥{{result.totalInterest}}</text>
+    </view>
+    <view class="overview-divider"></view>
+    <view class="overview-item">
+      <text class="overview-label">还款总额</text>
+      <text class="overview-value">¥{{result.totalPayment}}</text>
+    </view>
+  </view>
+
+  <!-- 月供信息 -->
+  <view class="payment-card">
+    <view class="payment-title">💰 月供信息</view>
+    <view wx:if="{{method === '等额本息'}}">
+      <view class="payment-item highlight">
+        <text class="payment-label">每月月供</text>
+        <text class="payment-value">¥{{result.monthlyPayment}}</text>
+      </view>
+      <view class="payment-tip">
+        💡 每月还款金额相同，便于规划
+      </view>
+    </view>
+    <view wx:if="{{method === '等额本金'}}">
+      <view class="payment-item highlight">
+        <text class="payment-label">首月月供</text>
+        <text class="payment-value">¥{{result.firstMonthPayment}}</text>
+      </view>
+      <view class="payment-item">
+        <text class="payment-label">末月月供</text>
+        <text class="payment-value">¥{{result.lastMonthPayment}}</text>
+      </view>
+      <view class="payment-tip">
+        💡 每月递减约 ¥{{monthlyDecrease}}，总利息更少
+      </view>
+    </view>
+  </view>
+
+  <!-- Visual Charts Section -->
+  <view class="chart-section">
+    <view class="chart-card">
+      <view class="chart-title">利息占比分析</view>
+      <canvas type="2d" id="pieCanvas" class="chart-canvas chart-pie"></canvas>
+    </view>
+
+    <view class="chart-card">
+      <view class="chart-title">月供构成趋势</view>
+      <canvas type="2d" id="lineCanvas" class="chart-canvas chart-line"></canvas>
+    </view>
+
+    <view class="chart-card">
+      <view class="chart-title">累计还款对比</view>
+      <canvas type="2d" id="barCanvas" class="chart-canvas chart-bar"></canvas>
+    </view>
+  </view>
+
+  <!-- 还款计划表头 -->
+  <view class="schedule-card">
+    <view class="schedule-header">
+      <text class="schedule-title">📅 还款明细（前12期）</text>
+      <view class="schedule-toggle" bindtap="onToggleSchedule">
+        <text class="toggle-text">{{showFullSchedule ? '收起' : '查看全部'}}</text>
+        <text class="toggle-icon">{{showFullSchedule ? '▲' : '▼'}}</text>
+      </view>
+    </view>
+
+    <!-- 表格标题 -->
+    <view class="table-header">
+      <text class="col col-period">期数</text>
+      <text class="col col-payment">月供</text>
+      <text class="col col-principal">本金</text>
+      <text class="col col-interest">利息</text>
+      <text class="col col-balance">剩余本金</text>
+    </view>
+
+    <!-- 还款明细列表 -->
+    <scroll-view
+      scroll-y
+      class="schedule-list"
+      style="height: {{showFullSchedule ? '800rpx' : '600rpx'}}">
+      <view
+        class="schedule-row {{index === 0 ? 'first' : ''}}"
+        wx:for="{{displaySchedule}}"
+        wx:key="period">
+        <text class="col col-period">{{item.period}}</text>
+        <text class="col col-payment">¥{{item.payment}}</text>
+        <text class="col col-principal">¥{{item.principal}}</text>
+        <text class="col col-interest">¥{{item.interest}}</text>
+        <text class="col col-balance">¥{{item.balance}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- 底部统计 -->
+    <view class="schedule-footer">
+      <view class="footer-item">
+        <text class="footer-label">累计本金</text>
+        <text class="footer-value">¥{{totalPrincipalPaid}}</text>
+      </view>
+      <view class="footer-item">
+        <text class="footer-label">累计利息</text>
+        <text class="footer-value">¥{{totalInterestPaid}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-secondary" bindtap="onGoToCompare">
+      对比还款方式
+    </button>
+    <button class="btn-primary" bindtap="onGoToEarlyRepayment">
+      提前还款计算
+    </button>
+  </view>
+
+  <!-- Save result as image -->
+  <view class="save-image-section">
+    <button class="btn-save-image" bindtap="onSaveImage">
+      <text class="save-icon">📷</text>
+      <text>保存结果图片</text>
+    </button>
+  </view>
+
+  <!-- Off-screen canvas for generating share image -->
+  <canvas
+    type="2d"
+    id="shareCanvas"
+    class="share-canvas"
+    style="width: 600px; height: 800px; position: fixed; left: -9999px; top: -9999px;">
+  </canvas>
+
+</view>

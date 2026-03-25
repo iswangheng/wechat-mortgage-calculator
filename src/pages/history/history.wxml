@@ -1,0 +1,71 @@
+<!-- History records page -->
+<view class="container">
+
+  <!-- Header bar -->
+  <view class="header-bar">
+    <text class="record-count">共 {{totalCount}} 条记录</text>
+    <view class="clear-btn" bindtap="onClearAll" wx:if="{{totalCount > 0}}">
+      <text class="clear-text">清空全部</text>
+    </view>
+  </view>
+
+  <!-- History list -->
+  <view class="history-list" wx:if="{{totalCount > 0}}">
+    <view
+      class="card-wrapper"
+      wx:for="{{historyList}}"
+      wx:key="id">
+      <view
+        class="history-card {{activeSwipeId === item.id ? 'swiped' : ''}}"
+        data-id="{{item.id}}"
+        bindtouchstart="onTouchStart"
+        bindtouchend="onTouchEnd"
+        bindtap="onCardTap"
+        bindlongpress="onLongPress">
+
+        <!-- Card content -->
+        <view class="card-content">
+          <view class="card-header">
+            <text class="card-title">{{item.title}}</text>
+            <text class="card-type type-{{item.type}}">{{item.typeLabel}}</text>
+          </view>
+
+          <view class="card-body">
+            <view class="card-info">
+              <text class="info-label">月供</text>
+              <text class="info-value highlight-value">{{item.monthlyPaymentDisplay}}元</text>
+            </view>
+            <view class="card-info">
+              <text class="info-label">总利息</text>
+              <text class="info-value">{{item.result.totalInterest}}元</text>
+            </view>
+          </view>
+
+          <view class="card-footer">
+            <text class="card-time">{{item.displayTime}}</text>
+            <view class="card-tags" wx:if="{{item.tags.length > 0}}">
+              <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- Swipe delete button -->
+      <view
+        class="delete-btn {{activeSwipeId === item.id ? 'show' : ''}}"
+        data-id="{{item.id}}"
+        catchtap="onDeleteItem">
+        <text class="delete-text">删除</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty state -->
+  <view class="empty-state" wx:if="{{totalCount === 0}}">
+    <text class="empty-icon">📋</text>
+    <text class="empty-title">暂无历史记录</text>
+    <text class="empty-desc">计算完成后会自动保存到这里</text>
+    <button class="btn-go-calculate" bindtap="onGoCalculate">去计算</button>
+  </view>
+
+</view>

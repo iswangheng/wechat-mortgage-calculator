@@ -1,0 +1,141 @@
+/* 城市选择页面样式 */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding-bottom: 40rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 20rpx 30rpx;
+  background: #ffffff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  width: 100%;
+  padding: 24rpx 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 2rpx solid #e9ecef;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.search-input::placeholder {
+  color: #999999;
+}
+
+/* 分区 */
+.section {
+  margin: 30rpx 30rpx 0;
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #666666;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+/* 城市列表 */
+.city-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.city-item {
+  position: relative;
+  flex: 0 0 calc(33.33% - 11rpx);
+  padding: 24rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  text-align: center;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80rpx;
+}
+
+.city-item.current {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  padding: 28rpx 30rpx;
+  justify-content: space-between;
+}
+
+.city-item.current .city-name {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.city-item.current .check-icon {
+  color: #ffffff;
+  font-size: 32rpx;
+}
+
+.city-item.selected {
+  background: #eef2ff;
+  border-color: #667eea;
+}
+
+.city-item.selected .city-name {
+  color: #667eea;
+  font-weight: bold;
+}
+
+.city-name {
+  font-size: 26rpx;
+  color: #333333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.city-desc {
+  font-size: 22rpx;
+  color: #999999;
+  margin-left: 8rpx;
+}
+
+.check-icon {
+  font-size: 28rpx;
+  color: #667eea;
+  margin-left: 8rpx;
+  font-weight: bold;
+}
+
+/* Active 状态 */
+.city-item:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  display: block;
+}
