@@ -38,14 +38,14 @@ input, textarea {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
 }
 
 .btn-secondary {
   background: #f5f7fa;
-  color: #667eea;
-  border: 2rpx solid #667eea;
+  color: #1677FF;
+  border: 2rpx solid #1677FF;
 }
 
 /* 通用卡片 */
@@ -66,7 +66,7 @@ input, textarea {
 
 /* 通用文本颜色 */
 .text-primary {
-  color: #667eea;
+  color: #1677FF;
 }
 
 .text-secondary {

@@ -88,7 +88,7 @@ Page({
       drawLineChart(canvas, ctx, {
         labels,
         datasets: [
-          { label: '1年期LPR', data: oneYearData, color: '#667eea' },
+          { label: '1年期LPR', data: oneYearData, color: '#1677FF' },
           { label: '5年期以上LPR', data: fiveYearData, color: '#f59e0b' }
         ]
       }, {

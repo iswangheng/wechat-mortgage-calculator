@@ -87,7 +87,7 @@ Page({
 
     initCanvas('#pieCanvas', this).then(({ canvas, ctx, width, height }) => {
       const pieData = [
-        { label: '\u672c\u91d1', value: principal, color: '#667eea' },
+        { label: '\u672c\u91d1', value: principal, color: '#1677FF' },
         { label: '\u5229\u606f', value: totalInterest, color: '#f59e0b' }
       ];
 
@@ -121,7 +121,7 @@ Page({
       drawLineChart(canvas, ctx, {
         labels,
         datasets: [
-          { label: '\u6bcf\u6708\u8fd8\u672c\u91d1', data: principalData, color: '#667eea' },
+          { label: '\u6bcf\u6708\u8fd8\u672c\u91d1', data: principalData, color: '#1677FF' },
           { label: '\u6bcf\u6708\u8fd8\u5229\u606f', data: interestData, color: '#f59e0b' }
         ]
       }, {
@@ -170,9 +170,9 @@ Page({
       drawBarChart(canvas, ctx, {
         labels,
         datasets: [
-          { label: '\u5df2\u8fd8\u672c\u91d1', data: cumulativePrincipal, color: '#667eea' },
+          { label: '\u5df2\u8fd8\u672c\u91d1', data: cumulativePrincipal, color: '#1677FF' },
           { label: '\u5df2\u8fd8\u5229\u606f', data: cumulativeInterest, color: '#f59e0b' },
-          { label: '\u5269\u4f59\u672c\u91d1', data: remainingPrincipal, color: '#764ba2' }
+          { label: '\u5269\u4f59\u672c\u91d1', data: remainingPrincipal, color: '#0052D9' }
         ]
       }, {
         title: '\u7d2f\u8ba1\u8fd8\u6b3e\u5bf9\u6bd4',
@@ -402,8 +402,8 @@ Page({
 
     // Top gradient header
     const gradient = ctx.createLinearGradient(0, 0, W, 160);
-    gradient.addColorStop(0, '#667eea');
-    gradient.addColorStop(1, '#764ba2');
+    gradient.addColorStop(0, '#1677FF');
+    gradient.addColorStop(1, '#0052D9');
     ctx.fillStyle = gradient;
     this.roundRectPath(ctx, 0, 0, W, 180, 0);
     ctx.fill();
@@ -446,7 +446,7 @@ Page({
     ctx.fillText(monthlyLabel, W / 2, 210);
 
     ctx.font = 'bold 40px sans-serif';
-    ctx.fillStyle = '#667eea';
+    ctx.fillStyle = '#1677FF';
     ctx.fillText('\u00A5' + monthlyValue, W / 2, 265);
 
     // Divider
@@ -496,7 +496,7 @@ Page({
     ctx.fill();
 
     ctx.font = 'bold 15px sans-serif';
-    ctx.fillStyle = '#667eea';
+    ctx.fillStyle = '#1677FF';
     ctx.textAlign = 'center';
     ctx.fillText('房贷计算器 2026', W / 2, 670);
 

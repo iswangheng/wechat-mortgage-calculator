@@ -99,7 +99,7 @@
 
 .card-type.type-commercial {
   background: #eef2ff;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .card-type.type-fund {
@@ -137,7 +137,7 @@
 
 .highlight-value {
   font-size: 32rpx;
-  color: #667eea;
+  color: #1677FF;
   font-weight: bold;
 }
 
@@ -227,14 +227,14 @@
 }
 
 .btn-go-calculate {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 28rpx;
   font-weight: bold;
   border-radius: 16rpx;
   padding: 20rpx 60rpx;
   border: none;
-  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8rpx 20rpx rgba(22, 119, 255, 0.4);
 }
 
 .btn-go-calculate::after {

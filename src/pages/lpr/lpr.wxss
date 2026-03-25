@@ -8,11 +8,11 @@
 
 /* ========== Current LPR card ========== */
 .lpr-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8rpx 24rpx rgba(22, 119, 255, 0.3);
 }
 
 .lpr-card-title {
@@ -95,7 +95,7 @@
   color: #333333;
   margin-bottom: 16rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #667eea;
+  border-left: 6rpx solid #1677FF;
 }
 
 .lpr-chart-canvas {
@@ -118,7 +118,7 @@
   color: #333333;
   margin-bottom: 24rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #667eea;
+  border-left: 6rpx solid #1677FF;
 }
 
 .timeline-list {
@@ -142,7 +142,7 @@
   width: 20rpx;
   height: 20rpx;
   border-radius: 50%;
-  background: #667eea;
+  background: #1677FF;
   border: 4rpx solid #eef2ff;
   z-index: 1;
 }
@@ -231,7 +231,7 @@
   color: #333333;
   margin-bottom: 8rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #667eea;
+  border-left: 6rpx solid #1677FF;
 }
 
 .simulator-desc {
@@ -295,9 +295,9 @@
 }
 
 .sim-year-item.active {
-  color: #667eea;
+  color: #1677FF;
   background: #eef2ff;
-  border-color: #667eea;
+  border-color: #1677FF;
   font-weight: bold;
 }
 
@@ -331,7 +331,7 @@
 }
 
 .sim-result-row.current {
-  background: rgba(102, 126, 234, 0.06);
+  background: rgba(22, 119, 255, 0.06);
 }
 
 .sim-col {
@@ -343,7 +343,7 @@
 
 .sim-col.bold {
   font-weight: bold;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .sim-col.save {

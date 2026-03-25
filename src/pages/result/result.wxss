@@ -8,11 +8,11 @@
 
 /* 贷款信息摘要 */
 .summary-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8rpx 24rpx rgba(22, 119, 255, 0.3);
 }
 
 .summary-title {
@@ -90,7 +90,7 @@
 
 .overview-value.primary {
   font-size: 40rpx;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .overview-value.warning {
@@ -124,8 +124,8 @@
 }
 
 .payment-item.highlight {
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-  border: 2rpx solid #667eea;
+  background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
+  border: 2rpx solid #1677FF;
 }
 
 .payment-label {
@@ -136,7 +136,7 @@
 .payment-value {
   font-size: 36rpx;
   font-weight: bold;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .payment-tip {
@@ -168,7 +168,7 @@
   color: #333333;
   margin-bottom: 16rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #667eea;
+  border-left: 6rpx solid #1677FF;
 }
 
 .chart-canvas {
@@ -221,12 +221,12 @@
 
 .toggle-text {
   font-size: 24rpx;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .toggle-icon {
   font-size: 20rpx;
-  color: #667eea;
+  color: #1677FF;
 }
 
 /* 表格样式 */
@@ -282,11 +282,11 @@
 }
 
 .schedule-row:active {
-  background: rgba(102, 126, 234, 0.05);
+  background: rgba(22, 119, 255, 0.05);
 }
 
 .schedule-row.first {
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(22, 119, 255, 0.1);
 }
 
 .schedule-row .col {
@@ -297,7 +297,7 @@
 
 .schedule-row.first .col {
   font-weight: bold;
-  color: #667eea;
+  color: #1677FF;
 }
 
 /* 底部统计 */
@@ -325,7 +325,7 @@
 .footer-value {
   font-size: 28rpx;
   font-weight: bold;
-  color: #667eea;
+  color: #1677FF;
 }
 
 /* 操作按钮 */
@@ -337,7 +337,7 @@
 
 .btn-primary {
   flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 28rpx;
   font-weight: bold;
@@ -349,12 +349,12 @@
 .btn-secondary {
   flex: 1;
   background: #f5f7fa;
-  color: #667eea;
+  color: #1677FF;
   font-size: 28rpx;
   font-weight: bold;
   border-radius: 16rpx;
   padding: 24rpx 0;
-  border: 2rpx solid #667eea;
+  border: 2rpx solid #1677FF;
 }
 
 .btn-primary::after,
@@ -372,7 +372,7 @@
   align-items: center;
   justify-content: center;
   gap: 12rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 28rpx;
   font-weight: bold;

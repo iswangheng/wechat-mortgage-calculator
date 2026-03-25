@@ -32,20 +32,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 20rpx 24rpx;
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
   border-radius: 12rpx;
-  border: 2rpx solid #667eea;
+  border: 2rpx solid #1677FF;
 }
 
 .city-name {
   font-size: 30rpx;
   font-weight: bold;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .arrow {
   font-size: 40rpx;
-  color: #667eea;
+  color: #1677FF;
   font-weight: bold;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .tab.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-weight: bold;
 }
@@ -84,7 +84,7 @@
 }
 
 .input-row:focus-within {
-  border-color: #667eea;
+  border-color: #1677FF;
   background: #ffffff;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .year-item.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-weight: bold;
 }
@@ -134,17 +134,17 @@
 .btn-reset {
   flex: 1;
   background: #f5f7fa;
-  color: #667eea;
+  color: #1677FF;
   font-size: 28rpx;
   font-weight: bold;
   border-radius: 16rpx;
   padding: 24rpx 0;
-  border: 2rpx solid #667eea;
+  border: 2rpx solid #1677FF;
 }
 
 .btn-compare {
   flex: 2;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 28rpx;
   font-weight: bold;
@@ -179,17 +179,17 @@
 }
 
 .compare-card.left {
-  border-top: 6rpx solid #667eea;
+  border-top: 6rpx solid #1677FF;
 }
 
 .compare-card.right {
-  border-top: 6rpx solid #764ba2;
+  border-top: 6rpx solid #0052D9;
 }
 
 /* 卡片头部 */
 .card-header {
   padding: 30rpx 20rpx 20rpx;
-  background: linear-gradient(180deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0.05) 0%, transparent 100%);
 }
 
 .method-name {
@@ -222,8 +222,8 @@
 }
 
 .data-item.highlight {
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-  border: 2rpx solid #667eea;
+  background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
+  border: 2rpx solid #1677FF;
 }
 
 .data-label {
@@ -238,7 +238,7 @@
 }
 
 .data-value.primary {
-  color: #667eea;
+  color: #1677FF;
   font-size: 36rpx;
 }
 
@@ -277,11 +277,11 @@
 
 /* 对比总结 */
 .comparison-summary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8rpx 24rpx rgba(22, 119, 255, 0.3);
 }
 
 .summary-title {
@@ -367,7 +367,7 @@
 /* 表头 */
 .table-header {
   display: flex;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   padding: 20rpx 0;
 }
 

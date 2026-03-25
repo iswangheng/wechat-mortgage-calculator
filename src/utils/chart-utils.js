@@ -2,9 +2,9 @@
 // Provides: pie chart, line chart, bar chart
 
 const COLORS = {
-  primary: '#667eea',
+  primary: '#1677FF',
   primaryLight: '#8b9cf7',
-  secondary: '#764ba2',
+  secondary: '#0052D9',
   orange: '#f59e0b',
   orangeLight: '#fbbf24',
   red: '#f5576c',
@@ -501,7 +501,7 @@ function formatNumber(num) {
 function hexToRgba(hex, alpha) {
   // Validate hex format; fall back to default color on invalid input
   if (!hex || typeof hex !== 'string' || !/^#[0-9A-Fa-f]{6}$/.test(hex)) {
-    hex = '#667eea';
+    hex = '#1677FF';
   }
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);

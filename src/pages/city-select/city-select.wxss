@@ -72,8 +72,8 @@
 
 .city-item.current {
   flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
+  border-color: #1677FF;
   padding: 28rpx 30rpx;
   justify-content: space-between;
 }
@@ -91,11 +91,11 @@
 
 .city-item.selected {
   background: #eef2ff;
-  border-color: #667eea;
+  border-color: #1677FF;
 }
 
 .city-item.selected .city-name {
-  color: #667eea;
+  color: #1677FF;
   font-weight: bold;
 }
 
@@ -115,7 +115,7 @@
 
 .check-icon {
   font-size: 28rpx;
-  color: #667eea;
+  color: #1677FF;
   margin-left: 8rpx;
   font-weight: bold;
 }

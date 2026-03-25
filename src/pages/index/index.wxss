@@ -2,14 +2,14 @@
 
 /* ========== 数据更新时间横幅 ========== */
 .data-freshness-banner {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   padding: 20rpx 30rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 16rpx;
   margin: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4rpx 12rpx rgba(22, 119, 255, 0.3);
 }
 
 .freshness-content {
@@ -111,7 +111,7 @@
 
 /* ========== 城市选择 ========== */
 .city-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
 }
 
@@ -179,9 +179,9 @@
 }
 
 .tab.active {
-  color: #667eea;
+  color: #1677FF;
   background: #eef2ff;
-  border-color: #667eea;
+  border-color: #1677FF;
   font-weight: bold;
 }
 
@@ -240,7 +240,7 @@
 
 .template-card:active {
   background: #eef2ff;
-  border-color: #667eea;
+  border-color: #1677FF;
 }
 
 .template-name {
@@ -283,13 +283,13 @@
 
 .btn-calculate {
   flex: 2;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 32rpx;
   font-weight: bold;
   border-radius: 16rpx;
   padding: 28rpx 0;
-  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8rpx 20rpx rgba(22, 119, 255, 0.4);
 }
 
 .btn-reset {
@@ -327,7 +327,7 @@
 }
 
 .result-item.highlight {
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
   padding: 28rpx 24rpx;
   border-radius: 16rpx;
   margin-bottom: 20rpx;
@@ -347,7 +347,7 @@
 
 .result-item.highlight .result-value {
   font-size: 40rpx;
-  color: #667eea;
+  color: #1677FF;
 }
 
 .btn-detail {
@@ -395,7 +395,7 @@
 
 .info-text {
   font-size: 26rpx;
-  color: #667eea;
+  color: #1677FF;
   font-weight: 500;
 }
 
@@ -430,9 +430,9 @@
 }
 
 .year-item.active {
-  color: #667eea;
+  color: #1677FF;
   background: #eef2ff;
-  border-color: #667eea;
+  border-color: #1677FF;
   font-weight: bold;
 }
 

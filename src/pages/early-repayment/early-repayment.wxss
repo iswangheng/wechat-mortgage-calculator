@@ -53,7 +53,7 @@
 }
 
 .input-row:focus-within {
-  border-color: #667eea;
+  border-color: #1677FF;
   background: #ffffff;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .year-item.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-weight: bold;
 }
@@ -118,7 +118,7 @@
 }
 
 .method-item.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-weight: bold;
 }
@@ -143,8 +143,8 @@
 }
 
 .after-method-item.active {
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-  border-color: #667eea;
+  background: linear-gradient(135deg, #1677FF15 0%, #0052D915 100%);
+  border-color: #1677FF;
 }
 
 .method-icon {
@@ -159,7 +159,7 @@
 }
 
 .after-method-item.active .method-name {
-  color: #667eea;
+  color: #1677FF;
 }
 
 .method-desc {
@@ -177,17 +177,17 @@
 .btn-reset {
   flex: 1;
   background: #f5f7fa;
-  color: #667eea;
+  color: #1677FF;
   font-size: 28rpx;
   font-weight: bold;
   border-radius: 16rpx;
   padding: 24rpx 0;
-  border: 2rpx solid #667eea;
+  border: 2rpx solid #1677FF;
 }
 
 .btn-calculate {
   flex: 2;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   color: #ffffff;
   font-size: 28rpx;
   font-weight: bold;
@@ -244,7 +244,7 @@
 }
 
 .column-label.highlight {
-  color: #667eea;
+  color: #1677FF;
 }
 
 .comparison-divider {
@@ -255,7 +255,7 @@
 
 .arrow {
   font-size: 48rpx;
-  color: #667eea;
+  color: #1677FF;
   font-weight: bold;
 }
 
@@ -289,11 +289,11 @@
 
 /* 节省详情卡片 */
 .savings-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8rpx 24rpx rgba(22, 119, 255, 0.3);
 }
 
 .savings-title {
@@ -400,7 +400,7 @@
 /* 表头 */
 .table-header {
   display: flex;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1677FF 0%, #0052D9 100%);
   padding: 20rpx 0;
 }
 
@@ -435,7 +435,7 @@
 }
 
 .table-row.highlight {
-  background: rgba(102, 126, 234, 0.05);
+  background: rgba(22, 119, 255, 0.05);
 }
 
 .td {
