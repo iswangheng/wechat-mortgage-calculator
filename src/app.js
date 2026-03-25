@@ -10,15 +10,8 @@ App({
     // 显示本地存储能力
     const logs = wx.getStorageSync("logs") || [];
     logs.unshift(Date.now());
+    if (logs.length > 50) logs.splice(50);
     wx.setStorageSync("logs", logs);
-
-    // 登录
-    wx.login({
-      success: (res) => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("登录成功", res.code);
-      },
-    });
 
     // Analytics: track app launch
     try {

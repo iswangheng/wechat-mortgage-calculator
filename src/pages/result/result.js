@@ -266,11 +266,11 @@ Page({
       const monthlyPayment = parseFloat(
         result.monthlyPayment.replace(/,/g, ""),
       );
-      const monthlyRate = this.calculateMonthlyRate(
-        principal,
-        monthlyPayment,
-        totalMonths,
-      );
+      // Use actual annual rate passed from index page instead of binary search approximation
+      const monthlyRate =
+        this.data.annualRate > 0
+          ? this.data.annualRate / 100 / 12
+          : this.calculateMonthlyRate(principal, monthlyPayment, totalMonths);
 
       let balance = principal;
 

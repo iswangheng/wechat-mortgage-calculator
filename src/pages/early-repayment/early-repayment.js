@@ -1,18 +1,18 @@
 // 提前还款计算页面
-const { calculateEarlyRepayment } = require('../../utils/mortgage-calculator');
+const { calculateEarlyRepayment } = require("../../utils/mortgage-calculator");
 
 Page({
   data: {
     // 原贷款信息
-    originalPrincipal: '',    // 原贷款总额（万元）
-    annualRate: 3.3,          // 年利率
-    years: 30,                // 贷款年限
-    method: '等额本息',       // 还款方式
+    originalPrincipal: "", // 原贷款总额（万元）
+    annualRate: 3.3, // 年利率
+    years: 30, // 贷款年限
+    method: "等额本息", // 还款方式
 
     // 提前还款信息
-    paidMonths: '',           // 已还月数
-    earlyAmount: '',          // 提前还款金额（万元）
-    afterMethod: 'reduceTerm', // 还款后处理方式：reduceTerm缩短年限 | reducePayment减少月供
+    paidMonths: "", // 已还月数
+    earlyAmount: "", // 提前还款金额（万元）
+    afterMethod: "reduceTerm", // 还款后处理方式：reduceTerm缩短年限 | reducePayment减少月供
 
     // 计算结果
     result: null,
@@ -21,7 +21,7 @@ Page({
     paidYears: 0,
     paidMonthsRemain: 0,
     savedYears: 0,
-    savedMonths: 0
+    savedMonths: 0,
   },
 
   onLoad() {
@@ -37,7 +37,9 @@ Page({
     let savedYears = 0;
     let savedMonths = 0;
     if (this.data.result && this.data.result.afterEarlyPayment.savedMonths) {
-      savedYears = Math.floor(this.data.result.afterEarlyPayment.savedMonths / 12);
+      savedYears = Math.floor(
+        this.data.result.afterEarlyPayment.savedMonths / 12,
+      );
       savedMonths = this.data.result.afterEarlyPayment.savedMonths % 12;
     }
 
@@ -45,7 +47,7 @@ Page({
       paidYears,
       paidMonthsRemain,
       savedYears,
-      savedMonths
+      savedMonths,
     });
   },
 
@@ -53,7 +55,7 @@ Page({
   onOriginalPrincipalInput(e) {
     this.setData({
       originalPrincipal: e.detail.value,
-      result: null
+      result: null,
     });
   },
 
@@ -61,7 +63,7 @@ Page({
   onAnnualRateInput(e) {
     this.setData({
       annualRate: e.detail.value,
-      result: null
+      result: null,
     });
   },
 
@@ -69,7 +71,7 @@ Page({
   onYearsChange(e) {
     this.setData({
       years: parseInt(e.currentTarget.dataset.years),
-      result: null
+      result: null,
     });
   },
 
@@ -77,7 +79,7 @@ Page({
   onMethodChange(e) {
     this.setData({
       method: e.currentTarget.dataset.method,
-      result: null
+      result: null,
     });
   },
 
@@ -85,7 +87,7 @@ Page({
   onPaidMonthsInput(e) {
     this.setData({
       paidMonths: e.detail.value,
-      result: null
+      result: null,
     });
     this.updateComputedData();
   },
@@ -94,7 +96,7 @@ Page({
   onEarlyAmountInput(e) {
     this.setData({
       earlyAmount: e.detail.value,
-      result: null
+      result: null,
     });
   },
 
@@ -102,7 +104,7 @@ Page({
   onAfterMethodChange(e) {
     this.setData({
       afterMethod: e.currentTarget.dataset.method,
-      result: null
+      result: null,
     });
   },
 
@@ -115,28 +117,28 @@ Page({
       method,
       paidMonths,
       earlyAmount,
-      afterMethod
+      afterMethod,
     } = this.data;
 
     // 验证输入
     if (!originalPrincipal || originalPrincipal <= 0) {
-      wx.showToast({ title: '请输入原贷款总额', icon: 'none' });
+      wx.showToast({ title: "请输入原贷款总额", icon: "none" });
       return;
     }
 
     if (!paidMonths || paidMonths <= 0) {
-      wx.showToast({ title: '请输入已还月数', icon: 'none' });
+      wx.showToast({ title: "请输入已还月数", icon: "none" });
       return;
     }
 
     if (!earlyAmount || earlyAmount <= 0) {
-      wx.showToast({ title: '请输入提前还款金额', icon: 'none' });
+      wx.showToast({ title: "请输入提前还款金额", icon: "none" });
       return;
     }
 
     const totalMonths = years * 12;
     if (parseInt(paidMonths) >= totalMonths) {
-      wx.showToast({ title: '已还月数不能超过总月数', icon: 'none' });
+      wx.showToast({ title: "已还月数不能超过总月数", icon: "none" });
       return;
     }
 
@@ -148,7 +150,7 @@ Page({
         method: method,
         paidMonths: parseInt(paidMonths),
         earlyAmount: parseFloat(earlyAmount),
-        afterMethod: afterMethod
+        afterMethod: afterMethod,
       });
 
       // 格式化结果数据
@@ -159,48 +161,59 @@ Page({
           monthlyPayment: this.formatNumber(result.original.monthlyPayment),
           totalPayment: this.formatNumber(result.original.totalPayment),
           totalInterest: this.formatNumber(result.original.totalInterest),
-          years: result.original.years
+          years: result.original.years,
         },
         afterEarlyPayment: {
           earlyAmount: result.afterEarlyPayment.earlyAmount,
           newPrincipal: result.afterEarlyPayment.newPrincipal,
           newYears: result.afterEarlyPayment.newYears,
-          monthlyPayment: this.formatNumber(result.afterEarlyPayment.monthlyPayment),
-          newTotalPayment: this.formatNumber(result.afterEarlyPayment.newTotalPayment),
-          newTotalInterest: this.formatNumber(result.afterEarlyPayment.newTotalInterest),
-          savedInterest: this.formatNumber(result.afterEarlyPayment.savedInterest),
+          monthlyPayment: this.formatNumber(
+            result.afterEarlyPayment.monthlyPayment,
+          ),
+          newTotalPayment: this.formatNumber(
+            result.afterEarlyPayment.newTotalPayment,
+          ),
+          newTotalInterest: this.formatNumber(
+            result.afterEarlyPayment.newTotalInterest,
+          ),
+          savedInterest: this.formatNumber(
+            result.afterEarlyPayment.savedInterest,
+          ),
           savedMonths: result.afterEarlyPayment.savedMonths || 0,
-          reducedMonthly: result.afterEarlyPayment.reducedMonthly || 0
-        }
+          reducedMonthly: result.afterEarlyPayment.reducedMonthly || 0,
+        },
       };
 
       this.setData({ result: formattedResult });
       this.updateComputedData();
 
-      wx.showToast({ title: '计算完成', icon: 'success' });
-
+      wx.showToast({ title: "计算完成", icon: "success" });
     } catch (error) {
-      console.error('计算错误:', error);
-      wx.showToast({ title: '计算失败，请检查输入', icon: 'none' });
+      console.error("计算错误:", error);
+      wx.showToast({
+        title: error.message || "计算失败，请检查输入",
+        icon: "none",
+        duration: 2500,
+      });
     }
   },
 
   // 重置
   onReset() {
     this.setData({
-      originalPrincipal: '',
-      paidMonths: '',
-      earlyAmount: '',
-      result: null
+      originalPrincipal: "",
+      paidMonths: "",
+      earlyAmount: "",
+      result: null,
     });
     this.updateComputedData();
   },
 
   // 格式化数字（添加千分位）
   formatNumber(num) {
-    if (!num && num !== 0) return '0';
-    const parts = num.toString().split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return parts.join('.');
-  }
+    if (!num && num !== 0) return "0";
+    const parts = num.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  },
 });
