@@ -22,7 +22,11 @@ function calculateEqualPayment(principal, annualRate, years) {
   if (r < 1e-10) {
     monthlyPayment = P / n;
   } else {
-    monthlyPayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    const expTerm = Math.pow(1 + r, n);
+    if (!isFinite(expTerm)) {
+      throw new Error("贷款参数导致计算溢出，请检查利率和年限");
+    }
+    monthlyPayment = (P * r * expTerm) / (expTerm - 1);
   }
 
   // 总还款额
@@ -230,6 +234,9 @@ function calculateEarlyRepayment(params) {
   }
 
   // 计算已还款后的剩余本金
+  if (!original.schedule || paidMonths - 1 >= original.schedule.length) {
+    throw new Error("还款计划数据异常");
+  }
   const remainingPrincipal =
     original.schedule[paidMonths - 1].remainingPrincipal;
 
@@ -260,9 +267,16 @@ function calculateEarlyRepayment(params) {
     // Calculate new term; handle zero-rate to avoid division by zero in log
     let newMonths;
     if (r < 1e-10) {
+      if (M <= 0) throw new Error("月供金额无效");
       newMonths = Math.ceil(P / M);
     } else {
+      if (M <= P * r) {
+        throw new Error("月供不足以覆盖利息，无法缩短年限");
+      }
       newMonths = Math.log(M / (M - P * r)) / Math.log(1 + r);
+      if (!isFinite(newMonths) || newMonths <= 0) {
+        throw new Error("计算结果异常，请检查输入参数");
+      }
       newMonths = Math.ceil(newMonths);
     }
     const newYears = newMonths / 12;

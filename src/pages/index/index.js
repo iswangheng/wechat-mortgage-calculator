@@ -527,8 +527,8 @@ Page({
 
     // 验证输入
     if (loanType === "commercial") {
-      if (!commercialPrincipal || commercialPrincipal <= 0) {
-        wx.showToast({ title: "请输入商贷金额", icon: "none" });
+      if (!commercialPrincipal || parseFloat(commercialPrincipal) <= 0) {
+        wx.showToast({ title: "请输入有效的商贷金额", icon: "none" });
         return;
       }
       // 验证贷款金额上限
@@ -554,8 +554,8 @@ Page({
         return;
       }
     } else if (loanType === "fund") {
-      if (!fundPrincipal || fundPrincipal <= 0) {
-        wx.showToast({ title: "请输入公积金金额", icon: "none" });
+      if (!fundPrincipal || parseFloat(fundPrincipal) <= 0) {
+        wx.showToast({ title: "请输入有效的公积金金额", icon: "none" });
         return;
       }
       // 验证利率范围
@@ -584,12 +584,12 @@ Page({
         return;
       }
     } else if (loanType === "combination") {
-      if (!commercialPrincipal || commercialPrincipal <= 0) {
-        wx.showToast({ title: "请输入商贷金额", icon: "none" });
+      if (!commercialPrincipal || parseFloat(commercialPrincipal) <= 0) {
+        wx.showToast({ title: "请输入有效的商贷金额", icon: "none" });
         return;
       }
-      if (!fundPrincipal || fundPrincipal <= 0) {
-        wx.showToast({ title: "请输入公积金金额", icon: "none" });
+      if (!fundPrincipal || parseFloat(fundPrincipal) <= 0) {
+        wx.showToast({ title: "请输入有效的公积金金额", icon: "none" });
         return;
       }
       // 验证组合贷总金额上限

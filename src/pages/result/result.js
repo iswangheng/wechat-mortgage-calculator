@@ -90,9 +90,17 @@ Page({
   // Chart 1: Interest ratio pie chart
   drawInterestPieChart() {
     const { result } = this.data;
-    const principal = parseFloat(result.principal.replace(/,/g, ""));
-    const totalInterest = parseFloat(result.totalInterest.replace(/,/g, ""));
-    const totalPayment = parseFloat(result.totalPayment.replace(/,/g, ""));
+    if (
+      !result ||
+      !result.principal ||
+      !result.totalInterest ||
+      !result.totalPayment
+    )
+      return;
+    const principal = parseFloat(result.principal.replace(/,/g, "")) || 0;
+    const totalInterest =
+      parseFloat(result.totalInterest.replace(/,/g, "")) || 0;
+    const totalPayment = parseFloat(result.totalPayment.replace(/,/g, "")) || 0;
 
     initCanvas("#pieCanvas", this)
       .then(({ canvas, ctx, width, height }) => {
@@ -122,14 +130,14 @@ Page({
 
     // Pick key month nodes for X axis
     const keyMonths = this.getKeyMonths(totalMonths);
-    const labels = keyMonths.map((m) => m + "\u6708");
-
-    // Extract principal and interest data at key months
-    const principalData = keyMonths.map((m) =>
-      parseFloat(schedule[m - 1].principal),
+    // Filter out months that exceed schedule length
+    const validMonths = keyMonths.filter((m) => m - 1 < schedule.length);
+    const labels = validMonths.map((m) => m + "\u6708");
+    const principalData = validMonths.map(
+      (m) => parseFloat(schedule[m - 1].principal) || 0,
     );
-    const interestData = keyMonths.map((m) =>
-      parseFloat(schedule[m - 1].interest),
+    const interestData = validMonths.map(
+      (m) => parseFloat(schedule[m - 1].interest) || 0,
     );
 
     initCanvas("#lineCanvas", this)
@@ -169,7 +177,9 @@ Page({
   // Chart 3: Cumulative repayment bar chart
   drawCumulativeBarChart() {
     const { schedule, result } = this.data;
-    const principal = parseFloat(result.principal.replace(/,/g, ""));
+    if (!result || !result.principal || !schedule || schedule.length === 0)
+      return;
+    const principal = parseFloat(result.principal.replace(/,/g, "")) || 0;
     const totalMonths = schedule.length;
 
     // Calculate cumulative values at 3 time points
@@ -187,9 +197,10 @@ Page({
     timePoints.forEach((monthIdx) => {
       let paidP = 0;
       let paidI = 0;
-      for (let i = 0; i < monthIdx; i++) {
-        paidP += parseFloat(schedule[i].principal);
-        paidI += parseFloat(schedule[i].interest);
+      const safeEnd = Math.min(monthIdx, schedule.length);
+      for (let i = 0; i < safeEnd; i++) {
+        paidP += parseFloat(schedule[i].principal) || 0;
+        paidI += parseFloat(schedule[i].interest) || 0;
       }
       cumulativePrincipal.push(Math.round(paidP));
       cumulativeInterest.push(Math.round(paidI));

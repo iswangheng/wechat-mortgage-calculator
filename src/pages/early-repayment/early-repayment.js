@@ -146,7 +146,7 @@ Page({
       const result = calculateEarlyRepayment({
         originalPrincipal: parseFloat(originalPrincipal),
         annualRate: parseFloat(annualRate),
-        years: years,
+        years: parseInt(years),
         method: method,
         paidMonths: parseInt(paidMonths),
         earlyAmount: parseFloat(earlyAmount),

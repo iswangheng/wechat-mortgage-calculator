@@ -21,22 +21,29 @@ App({
     }
 
     // 获取系统信息
-    const systemInfo = wx.getSystemInfoSync();
-    this.globalData.systemInfo = systemInfo;
-    console.log("系统信息:", systemInfo);
+    try {
+      const systemInfo = wx.getSystemInfoSync();
+      this.globalData.systemInfo = systemInfo;
+    } catch (e) {
+      console.error("获取系统信息失败:", e);
+    }
 
     // 加载上次选择的城市
-    const lastCity = wx.getStorageSync("lastSelectedCity");
-    if (lastCity) {
-      this.globalData.selectedCity = lastCity;
+    try {
+      const lastCity = wx.getStorageSync("lastSelectedCity");
+      if (lastCity) {
+        this.globalData.selectedCity = lastCity;
+      }
+    } catch (e) {
+      console.error("读取城市缓存失败:", e);
     }
   },
 
-  onShow() {
-    console.log("App Show");
-  },
+  onShow() {},
 
-  onHide() {
-    console.log("App Hide");
+  onHide() {},
+
+  onError(msg) {
+    console.error("App Error:", msg);
   },
 });
