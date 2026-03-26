@@ -426,6 +426,18 @@ Page({
           this.data.maxFundLimit,
         ).toFixed(2);
         this.setData({ fundPrincipal: fundAmount });
+      } else if (this.data.loanType === "combination") {
+        const fundAmount = Math.min(
+          parseFloat(maxLoanAmount),
+          this.data.maxFundLimit,
+        ).toFixed(2);
+        const commercialAmount = (
+          parseFloat(maxLoanAmount) - parseFloat(fundAmount)
+        ).toFixed(2);
+        this.setData({
+          fundPrincipal: fundAmount,
+          commercialPrincipal: commercialAmount,
+        });
       }
     }
   },

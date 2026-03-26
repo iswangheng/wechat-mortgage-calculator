@@ -184,7 +184,7 @@ function calculateCombinationLoan(params) {
       lastMonthPayment: commercial.lastMonthPayment + fund.lastMonthPayment,
       totalPayment: commercial.totalPayment + fund.totalPayment,
       totalInterest: commercial.totalInterest + fund.totalInterest,
-      totalPrincipal: commercial.principal + fund.principal,
+      principal: commercial.principal + fund.principal,
     };
   } else {
     return {
@@ -194,7 +194,7 @@ function calculateCombinationLoan(params) {
       monthlyPayment: commercial.monthlyPayment + fund.monthlyPayment,
       totalPayment: commercial.totalPayment + fund.totalPayment,
       totalInterest: commercial.totalInterest + fund.totalInterest,
-      totalPrincipal: commercial.principal + fund.principal,
+      principal: commercial.principal + fund.principal,
     };
   }
 }
@@ -407,7 +407,7 @@ function comparePaymentMethods(principal, annualRate, years) {
   const equalPrincipal = calculateEqualPrincipal(principal, annualRate, years);
 
   const savedInterest =
-    equalPrincipal.totalInterest - equalPayment.totalInterest;
+    equalPayment.totalInterest - equalPrincipal.totalInterest;
   const firstMonthDiff =
     equalPrincipal.firstMonthPayment - equalPayment.monthlyPayment;
 

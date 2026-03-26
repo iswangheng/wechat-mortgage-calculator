@@ -105,12 +105,12 @@
         <text class="sim-col">-</text>
       </view>
       <view class="sim-result-row">
-        <text class="sim-col">降10BP {{fiveYearLpr - 0.1}}%</text>
+        <text class="sim-col">降10BP {{down10Rate}}%</text>
         <text class="sim-col">{{down10Monthly}}</text>
         <text class="sim-col save">-{{down10Save}}</text>
       </view>
       <view class="sim-result-row">
-        <text class="sim-col">降20BP {{fiveYearLpr - 0.2}}%</text>
+        <text class="sim-col">降20BP {{down20Rate}}%</text>
         <text class="sim-col">{{down20Monthly}}</text>
         <text class="sim-col save">-{{down20Save}}</text>
       </view>

@@ -160,8 +160,10 @@ Page({
       currentMonthly: currentMonthly.toFixed(2),
       down10Monthly: down10Monthly.toFixed(2),
       down10Save: (currentMonthly - down10Monthly).toFixed(2),
+      down10Rate: (fiveYearLpr - 0.1).toFixed(2),
       down20Monthly: down20Monthly.toFixed(2),
       down20Save: (currentMonthly - down20Monthly).toFixed(2),
+      down20Rate: (fiveYearLpr - 0.2).toFixed(2),
     });
   },
 });
