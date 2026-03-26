@@ -258,6 +258,15 @@
   border-color: #1677FF;
 }
 
+.template-card.template-active {
+  background: #eef2ff;
+  border-color: #1677FF;
+}
+
+.template-card.template-active .template-name {
+  color: #1677FF;
+}
+
 .template-name {
   font-size: 26rpx;
   font-weight: bold;

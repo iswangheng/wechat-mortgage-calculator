@@ -115,6 +115,7 @@ Page({
 
     // Quick templates
     quickTemplates: QUICK_TEMPLATES,
+    activeTemplateIndex: -1,
 
     // Validation error states
     errors: {
@@ -284,7 +285,7 @@ Page({
   // 贷款类型切换
   onLoanTypeChange(e) {
     const loanType = e.currentTarget.dataset.type;
-    this.setData({ loanType, result: null });
+    this.setData({ loanType, result: null, activeTemplateIndex: -1 });
   },
 
   // Debounce utility: delays execution to avoid frequent triggers
@@ -323,6 +324,8 @@ Page({
       housePrice: template.housePrice,
       loanType: template.loanType,
       years: template.years,
+      downPaymentRatio: template.downPaymentRatio,
+      activeTemplateIndex: index,
       result: null,
       safetyLine: null,
       errors: { housePrice: "", commercialRate: "", fundRate: "" },
@@ -341,7 +344,7 @@ Page({
   // 房屋总价输入
   onHousePriceInput(e) {
     const housePrice = e.detail.value;
-    this.setData({ housePrice });
+    this.setData({ housePrice, activeTemplateIndex: -1 });
 
     // Real-time validation
     const error = this.validateField("housePrice", housePrice);

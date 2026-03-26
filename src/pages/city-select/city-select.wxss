@@ -48,17 +48,18 @@
   border-bottom: 2rpx solid #f0f0f0;
 }
 
-/* 城市列表 */
+/* 城市列表 - 动态布局，根据屏幕宽度自适应列数 */
 .city-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
+  gap: 12rpx;
 }
 
 .city-item {
   position: relative;
-  flex: 0 0 calc(33.33% - 11rpx);
-  padding: 24rpx 20rpx;
+  flex: 1 0 120rpx;
+  max-width: calc(25% - 9rpx);
+  padding: 20rpx 10rpx;
   background: #f8f9fa;
   border-radius: 12rpx;
   border: 2rpx solid transparent;
@@ -67,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 80rpx;
+  min-height: 72rpx;
 }
 
 .city-item.current {

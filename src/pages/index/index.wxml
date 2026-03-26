@@ -34,7 +34,7 @@
     <view class="section-title">⚡ 快捷方案</view>
     <view class="templates-row">
       <view
-        class="template-card"
+        class="template-card {{activeTemplateIndex === index ? 'template-active' : ''}}"
         wx:for="{{quickTemplates}}"
         wx:key="name"
         bindtap="onApplyTemplate"
