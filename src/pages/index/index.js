@@ -320,16 +320,22 @@ Page({
     const template = QUICK_TEMPLATES[index];
     if (!template) return;
 
+    // Only set loan type and years; keep user's house price and down payment ratio
     this.setData({
-      housePrice: template.housePrice,
       loanType: template.loanType,
       years: template.years,
-      downPaymentRatio: template.downPaymentRatio,
       activeTemplateIndex: index,
       result: null,
       safetyLine: null,
-      errors: { housePrice: "", commercialRate: "", fundRate: "" },
     });
+
+    // If user hasn't entered a house price yet, use template default
+    if (!this.data.housePrice) {
+      this.setData({
+        housePrice: template.housePrice,
+        downPaymentRatio: template.downPaymentRatio,
+      });
+    }
 
     this.calculateDownPayment();
 
