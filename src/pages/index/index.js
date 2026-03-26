@@ -700,6 +700,18 @@ Page({
         safetyLine,
       });
 
+      // Scroll to result section after render
+      setTimeout(() => {
+        wx.createSelectorQuery()
+          .select("#resultSection")
+          .boundingClientRect((rect) => {
+            if (rect) {
+              wx.pageScrollTo({ scrollTop: rect.top - 20, duration: 300 });
+            }
+          })
+          .exec();
+      }, 100);
+
       wx.showToast({ title: "计算成功", icon: "success" });
 
       // Analytics: track calculation
