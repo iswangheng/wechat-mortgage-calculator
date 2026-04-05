@@ -1,5 +1,5 @@
 // LPR rate tracking page
-const { LPR_2026, getDataMetadata } = require("../../config/cities-2026");
+const DataService = require("../../services/data-service");
 const {
   drawLineChart,
   initCanvas,
@@ -50,10 +50,10 @@ const LPR_ADJUSTMENTS = [
 
 Page({
   data: {
-    // Current LPR rates
-    oneYearLpr: LPR_2026.oneYear,
-    fiveYearLpr: LPR_2026.fiveYear,
-    lastUpdate: LPR_2026.lastUpdate,
+    // Current LPR rates (set dynamically in onLoad)
+    oneYearLpr: 3.0,
+    fiveYearLpr: 3.5,
+    lastUpdate: "",
     dataSource: "中国人民银行",
 
     // Adjustment records
@@ -72,6 +72,14 @@ Page({
   },
 
   onLoad() {
+    // Load latest LPR from DataService
+    const lpr = DataService.getLPR();
+    this.setData({
+      oneYearLpr: lpr.oneYear,
+      fiveYearLpr: lpr.fiveYear,
+      lastUpdate: lpr.lastUpdate || "",
+    });
+
     // Analytics: track LPR page view
     try {
       wx.reportAnalytics("page_view", { page: "lpr" });

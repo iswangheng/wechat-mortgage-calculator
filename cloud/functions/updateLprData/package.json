@@ -1,0 +1,9 @@
+{
+  "name": "updateLprData",
+  "version": "1.0.0",
+  "description": "Auto-fetch LPR rates from PBC website and update cloud database",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

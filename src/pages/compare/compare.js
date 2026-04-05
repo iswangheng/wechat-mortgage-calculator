@@ -1,6 +1,6 @@
 // 还款方式对比页面
 const { comparePaymentMethods } = require("../../utils/mortgage-calculator");
-const { getCityConfig } = require("../../config/cities-2026");
+const DataService = require("../../services/data-service");
 
 Page({
   data: {
@@ -13,7 +13,7 @@ Page({
   },
 
   onLoad() {
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
     this.setData({
       annualRate: cityConfig.commercialRate.first,
     });
@@ -21,7 +21,7 @@ Page({
 
   onShow() {
     // Update rate when city changes (e.g. returning from city-select)
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
     const { loanType } = this.data;
     let annualRate;
     if (loanType === "fund") {
@@ -42,7 +42,7 @@ Page({
   // 贷款类型切换
   onLoanTypeChange(e) {
     const loanType = e.currentTarget.dataset.type;
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
 
     let annualRate;
     if (loanType === "commercial") {

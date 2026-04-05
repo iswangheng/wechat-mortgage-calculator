@@ -1,5 +1,5 @@
 // 城市选择页面
-const { getCitiesByLevel } = require('../../config/cities-2026');
+const DataService = require('../../services/data-service');
 
 Page({
   data: {
@@ -16,7 +16,7 @@ Page({
     const currentCity = (prevPage && prevPage.data.cityName) || getApp().globalData.selectedCity || '上海';
 
     // 获取城市列表
-    const citiesByLevel = getCitiesByLevel();
+    const citiesByLevel = DataService.getCitiesByLevel();
     const allCities = [
       { level: '一线城市', cities: citiesByLevel['一线'] },
       { level: '新一线城市', cities: citiesByLevel['新一线'] },

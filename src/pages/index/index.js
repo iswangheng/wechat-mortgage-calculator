@@ -1,9 +1,5 @@
 // 房贷计算器主页面
-const {
-  getCityConfig,
-  getDataMetadata,
-  checkDataFreshness,
-} = require("../../config/cities-2026");
+const DataService = require("../../services/data-service");
 const {
   calculateCommercialLoan,
   calculateFundLoan,
@@ -217,8 +213,8 @@ Page({
 
   // 加载数据元信息
   loadDataMetadata() {
-    const metadata = getDataMetadata();
-    const freshness = checkDataFreshness();
+    const metadata = DataService.getDataMetadata();
+    const freshness = DataService.checkDataFreshness();
 
     // Only show date, not time
     const updateDate = (metadata.lastUpdate || "").split(" ")[0];
@@ -242,8 +238,8 @@ Page({
   // 显示数据来源
   onShowDataSource() {
     try {
-      const metadata = getDataMetadata();
-      const { LPR_2026 } = require("../../config/cities-2026");
+      const metadata = DataService.getDataMetadata();
+      const lpr = DataService.getLPR();
 
       this.setData({
         showDataSourceModal: true,
@@ -255,8 +251,8 @@ Page({
             { label: "限购政策", value: "各地房管局" },
           ],
           lpr: {
-            oneYear: LPR_2026.oneYear,
-            fiveYear: LPR_2026.fiveYear,
+            oneYear: lpr.oneYear,
+            fiveYear: lpr.fiveYear,
           },
           version: metadata.version,
           lastUpdate: (metadata.lastUpdate || "").split(" ")[0],
@@ -278,7 +274,7 @@ Page({
 
   // 加载城市配置
   loadCityConfig() {
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
     const downPaymentRatio =
       cityConfig.downPayment[this.data.houseNumber][this.data.houseType];
 
@@ -393,7 +389,7 @@ Page({
   // 首套/二套切换
   onHouseNumberChange(e) {
     const houseNumber = e.detail.value;
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
     const downPaymentRatio =
       cityConfig.downPayment[houseNumber][this.data.houseType];
 
@@ -419,7 +415,7 @@ Page({
   // 房屋类型切换
   onHouseTypeChange(e) {
     const houseType = e.detail.value;
-    const cityConfig = getCityConfig(this.data.cityName);
+    const cityConfig = DataService.getCityConfig(this.data.cityName);
     const downPaymentRatio =
       cityConfig.downPayment[this.data.houseNumber][houseType];
 
