@@ -130,6 +130,9 @@ Page({
 
   // Debounce timers
   _debounceTimers: {},
+  // Track whether user manually edited loan principal
+  _manualCommercialEdit: false,
+  _manualFundEdit: false,
 
   onLoad() {
     this.loadDataMetadata();
@@ -149,6 +152,8 @@ Page({
 
   // Restore input parameters from a history record
   restoreFromHistory(record) {
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
     const { type, city, inputData } = record;
 
     this.setData({
@@ -302,7 +307,10 @@ Page({
   // 贷款类型切换
   onLoanTypeChange(e) {
     const loanType = e.currentTarget.dataset.type;
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
     this.setData({ loanType, result: null, activeTemplateIndex: -1 });
+    this.calculateDownPayment();
   },
 
   // Debounce utility: delays execution to avoid frequent triggers
@@ -367,6 +375,9 @@ Page({
   // 房屋总价输入
   onHousePriceInput(e) {
     const housePrice = e.detail.value;
+    // Reset manual edit flags since house price changed
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
     this.setData({ housePrice, activeTemplateIndex: -1 });
 
     // Real-time validation
@@ -390,6 +401,10 @@ Page({
     const commercialRate = cityConfig.commercialRate[houseNumber];
     const fundRate = cityConfig.fundRate[houseNumber];
 
+    // Reset manual edit flags since down payment changed
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
+
     this.setData({
       houseNumber,
       downPaymentRatio,
@@ -408,6 +423,9 @@ Page({
     const downPaymentRatio =
       cityConfig.downPayment[this.data.houseNumber][houseType];
 
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
+
     this.setData({
       houseType,
       downPaymentRatio,
@@ -421,46 +439,41 @@ Page({
   calculateDownPayment() {
     const { housePrice, downPaymentRatio } = this.data;
     if (housePrice) {
-      const downPaymentAmount = (
-        (parseFloat(housePrice) * downPaymentRatio) /
-        100
-      ).toFixed(2);
-      const maxLoanAmount = (
-        parseFloat(housePrice) - parseFloat(downPaymentAmount)
-      ).toFixed(2);
+      const price = parseFloat(housePrice);
+      const downPaymentAmount = Math.round(price * downPaymentRatio / 100);
+      const maxLoanAmount = Math.round(price - downPaymentAmount);
 
       this.setData({
         downPaymentAmount,
-        maxLoanAmount: parseFloat(maxLoanAmount),
+        maxLoanAmount,
       });
 
-      // 自动填充贷款金额
+      // Auto-fill loan amount only if user hasn't manually edited it
       if (this.data.loanType === "commercial") {
-        this.setData({ commercialPrincipal: maxLoanAmount });
+        if (!this._manualCommercialEdit) {
+          this.setData({ commercialPrincipal: maxLoanAmount });
+        }
       } else if (this.data.loanType === "fund") {
-        const fundAmount = Math.min(
-          parseFloat(maxLoanAmount),
-          this.data.maxFundLimit,
-        ).toFixed(2);
-        this.setData({ fundPrincipal: fundAmount });
+        if (!this._manualFundEdit) {
+          const fundAmount = Math.min(maxLoanAmount, this.data.maxFundLimit);
+          this.setData({ fundPrincipal: fundAmount });
+        }
       } else if (this.data.loanType === "combination") {
-        const fundAmount = Math.min(
-          parseFloat(maxLoanAmount),
-          this.data.maxFundLimit,
-        ).toFixed(2);
-        const commercialAmount = (
-          parseFloat(maxLoanAmount) - parseFloat(fundAmount)
-        ).toFixed(2);
-        this.setData({
-          fundPrincipal: fundAmount,
-          commercialPrincipal: commercialAmount,
-        });
+        const fundAmount = Math.min(maxLoanAmount, this.data.maxFundLimit);
+        const commercialAmount = maxLoanAmount - fundAmount;
+        if (!this._manualFundEdit) {
+          this.setData({ fundPrincipal: fundAmount });
+        }
+        if (!this._manualCommercialEdit) {
+          this.setData({ commercialPrincipal: commercialAmount });
+        }
       }
     }
   },
 
   // 商贷金额输入
   onCommercialPrincipalInput(e) {
+    this._manualCommercialEdit = true;
     this.setData({
       commercialPrincipal: e.detail.value,
       result: null,
@@ -484,6 +497,7 @@ Page({
 
   // 公积金金额输入
   onFundPrincipalInput(e) {
+    this._manualFundEdit = true;
     this.setData({
       fundPrincipal: e.detail.value,
       result: null,
@@ -842,6 +856,8 @@ Page({
 
   // 重置
   onReset() {
+    this._manualCommercialEdit = false;
+    this._manualFundEdit = false;
     this.setData({
       housePrice: "",
       commercialPrincipal: "",
