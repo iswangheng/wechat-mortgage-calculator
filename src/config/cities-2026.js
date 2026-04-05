@@ -1,20 +1,20 @@
 // 2026年中国主要城市房贷政策配置
-// Data Source: 各地住建委、公积金中心官网（2026年1月数据）
-// Last Update: 2026-03-24
+// Data Source: 各地住建委、公积金中心官网（2026年4月数据）
+// Last Update: 2026-04-05
 
 const CITY_CONFIG_2026 = {
   上海: {
     level: "一线",
     name: "上海",
     fundLimit: {
-      single: 60, // 单人最高60万
-      family: 120, // 家庭最高120万
+      single: 120, // 单人最高120万（2026沪七条上调）
+      family: 240, // 家庭最高240万（2026沪七条上调）
       multiKid: 240, // 多子女家庭240万
-      green: 324, // 绿色建筑+多子女最高324万（2026新政）
+      green: 324, // 绿色建筑+多子女最高324万
     },
     commercialRate: {
-      first: 3.3, // 首套商贷利率 3.3%
-      second: 4.1, // 二套商贷利率 4.1%
+      first: 2.9, // 首套商贷利率（LPR3.50%-60BP）
+      second: 3.5, // 二套商贷利率（LPR3.50%）
     },
     fundRate: {
       first: 2.6, // 首套公积金利率 2.6%
@@ -22,18 +22,18 @@ const CITY_CONFIG_2026 = {
     },
     downPayment: {
       first: {
-        ordinary: 30, // 首套普通住宅首付 30%
-        nonOrdinary: 35, // 首套非普通住宅首付 35%
+        ordinary: 15, // 首套普通住宅首付 15%（2026沪七条）
+        nonOrdinary: 20, // 首套非普通住宅首付 20%
       },
       second: {
-        ordinary: 50, // 二套普通住宅首付 50%
-        nonOrdinary: 70, // 二套非普通住宅首付 70%
+        ordinary: 25, // 二套普通住宅首付 25%
+        nonOrdinary: 35, // 二套非普通住宅首付 35%
       },
     },
-    purchaseRestriction: true, // 有限购
+    purchaseRestriction: true, // 有限购（外环内限2套，外环外不限）
     fundForeign: {
       enabled: true,
-      socialSecurity: 12, // 外地户籍需社保12个月（2026放宽）
+      socialSecurity: 12, // 外环内需社保1年，外环外不限
     },
   },
 
@@ -43,11 +43,11 @@ const CITY_CONFIG_2026 = {
     fundLimit: {
       single: 50,
       family: 120,
-      multiKid: 120, // 北京暂无多子女额外额度
+      multiKid: 160, // 多子女家庭上浮
     },
     commercialRate: {
-      first: 3.3,
-      second: 4.2,
+      first: 2.95, // 首套商贷利率（LPR3.50%-55BP）
+      second: 3.55, // 二套商贷利率（LPR3.50%+5BP）
     },
     fundRate: {
       first: 2.6,
@@ -55,18 +55,18 @@ const CITY_CONFIG_2026 = {
     },
     downPayment: {
       first: {
-        ordinary: 35, // 北京首套首付更高
-        nonOrdinary: 40,
+        ordinary: 15, // 首套首付15%（2026新政）
+        nonOrdinary: 20,
       },
       second: {
-        ordinary: 60,
-        nonOrdinary: 80,
+        ordinary: 20, // 二套首付20%（2026新政）
+        nonOrdinary: 35,
       },
     },
     purchaseRestriction: true,
     fundForeign: {
       enabled: true,
-      socialSecurity: 60, // 外地户籍需社保5年
+      socialSecurity: 36, // 五环内需3年，五环外需2年（2026放宽）
     },
   },
 
@@ -75,12 +75,12 @@ const CITY_CONFIG_2026 = {
     name: "深圳",
     fundLimit: {
       single: 50,
-      family: 90, // 深圳公积金额度较低
-      multiKid: 90,
+      family: 90,
+      multiKid: 126, // 多子女家庭上浮40%
     },
     commercialRate: {
-      first: 3.3,
-      second: 4.2,
+      first: 3.05, // 首套商贷利率（LPR3.50%-45BP）
+      second: 3.05, // 二套同首套利率（2025.9起不再区分）
     },
     fundRate: {
       first: 2.6,
@@ -88,18 +88,18 @@ const CITY_CONFIG_2026 = {
     },
     downPayment: {
       first: {
-        ordinary: 30,
-        nonOrdinary: 40,
+        ordinary: 15, // 首套首付15%（2026新政）
+        nonOrdinary: 15,
       },
       second: {
-        ordinary: 70, // 深圳二套首付最高
-        nonOrdinary: 80,
+        ordinary: 20, // 二套首付20%（2026新政）
+        nonOrdinary: 20,
       },
     },
-    purchaseRestriction: true,
+    purchaseRestriction: true, // 有限购（户籍+社保限制）
     fundForeign: {
       enabled: true,
-      socialSecurity: 36, // 外地户籍需社保3年
+      socialSecurity: 12, // 外地户籍需社保1年（2026放宽）
     },
   },
 
@@ -109,11 +109,11 @@ const CITY_CONFIG_2026 = {
     fundLimit: {
       single: 60,
       family: 100,
-      multiKid: 100,
+      multiKid: 140, // 多子女家庭上浮40%
     },
     commercialRate: {
-      first: 3.2, // 广州利率略低
-      second: 4.0,
+      first: 2.9, // 首套商贷利率（LPR3.50%-60BP）
+      second: 3.3, // 二套商贷利率
     },
     fundRate: {
       first: 2.6,
@@ -121,18 +121,18 @@ const CITY_CONFIG_2026 = {
     },
     downPayment: {
       first: {
-        ordinary: 30,
-        nonOrdinary: 40,
+        ordinary: 15, // 首套首付15%（广州全面取消限购后）
+        nonOrdinary: 15,
       },
       second: {
-        ordinary: 70,
-        nonOrdinary: 70,
+        ordinary: 15, // 二套首付15%
+        nonOrdinary: 25,
       },
     },
-    purchaseRestriction: true,
+    purchaseRestriction: false, // 已全面取消限购（一线中最早取消）
     fundForeign: {
       enabled: true,
-      socialSecurity: 12,
+      socialSecurity: 0, // 无社保要求
     },
   },
 
@@ -145,8 +145,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 100,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95, // LPR3.50%-55BP
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -178,8 +178,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0, // LPR3.50%-50BP
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -211,8 +211,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95, // LPR3.50%-55BP
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -244,8 +244,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0, // LPR3.50%-50BP
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -277,8 +277,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 90,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -310,8 +310,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 65,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -343,8 +343,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -376,8 +376,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -409,8 +409,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -442,8 +442,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -475,8 +475,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 100,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -508,8 +508,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -541,8 +541,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -574,8 +574,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -607,8 +607,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -640,8 +640,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -673,8 +673,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -706,8 +706,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -739,8 +739,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -772,8 +772,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -805,8 +805,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -838,8 +838,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -871,8 +871,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -904,8 +904,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -937,8 +937,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -970,8 +970,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1003,8 +1003,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1036,8 +1036,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1069,8 +1069,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1102,8 +1102,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 80,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1135,8 +1135,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1168,8 +1168,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1201,8 +1201,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1234,8 +1234,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1267,8 +1267,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1300,8 +1300,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.4,
-      second: 4.0,
+      first: 2.95,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1333,8 +1333,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1366,8 +1366,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1399,8 +1399,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1432,8 +1432,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1465,8 +1465,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1498,8 +1498,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -1996,8 +1996,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2029,8 +2029,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2062,8 +2062,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2095,8 +2095,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2128,8 +2128,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2161,8 +2161,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2194,8 +2194,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2227,8 +2227,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2260,8 +2260,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2293,8 +2293,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2326,8 +2326,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2360,8 +2360,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2393,8 +2393,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2426,8 +2426,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2459,8 +2459,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2492,8 +2492,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2525,8 +2525,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2558,8 +2558,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2591,8 +2591,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2624,8 +2624,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2657,8 +2657,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2690,8 +2690,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2723,8 +2723,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2756,8 +2756,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2789,8 +2789,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2822,8 +2822,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2856,8 +2856,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2889,8 +2889,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2922,8 +2922,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2955,8 +2955,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -2988,8 +2988,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3021,8 +3021,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3055,8 +3055,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3088,8 +3088,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3121,8 +3121,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3154,8 +3154,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3187,8 +3187,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3220,8 +3220,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3253,8 +3253,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3286,8 +3286,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3319,8 +3319,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3352,8 +3352,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3386,8 +3386,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3419,8 +3419,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3452,8 +3452,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3485,8 +3485,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3518,8 +3518,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3551,8 +3551,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3584,8 +3584,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3617,8 +3617,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3650,8 +3650,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3684,8 +3684,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3717,8 +3717,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3750,8 +3750,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3783,8 +3783,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3816,8 +3816,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3849,8 +3849,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3882,8 +3882,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3915,8 +3915,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3948,8 +3948,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -3981,8 +3981,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4014,8 +4014,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4047,8 +4047,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4080,8 +4080,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4113,8 +4113,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4146,8 +4146,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4180,8 +4180,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4213,8 +4213,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4246,8 +4246,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4279,8 +4279,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4312,8 +4312,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4345,8 +4345,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4378,8 +4378,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4411,8 +4411,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4444,8 +4444,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4477,8 +4477,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4511,8 +4511,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4544,8 +4544,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4577,8 +4577,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4610,8 +4610,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4643,8 +4643,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4676,8 +4676,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4709,8 +4709,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4742,8 +4742,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -4775,8 +4775,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5338,8 +5338,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5371,8 +5371,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5404,8 +5404,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5437,8 +5437,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5470,8 +5470,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5503,8 +5503,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5536,8 +5536,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5569,8 +5569,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5602,8 +5602,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5635,8 +5635,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5668,8 +5668,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5701,8 +5701,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5734,8 +5734,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5768,8 +5768,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5801,8 +5801,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5834,8 +5834,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5868,8 +5868,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5901,8 +5901,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5934,8 +5934,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -5967,8 +5967,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6000,8 +6000,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6033,8 +6033,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6066,8 +6066,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6099,8 +6099,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6132,8 +6132,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6165,8 +6165,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6198,8 +6198,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6232,8 +6232,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6265,8 +6265,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6298,8 +6298,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6331,8 +6331,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6364,8 +6364,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6397,8 +6397,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6430,8 +6430,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6463,8 +6463,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6496,8 +6496,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6529,8 +6529,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6562,8 +6562,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6595,8 +6595,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6629,8 +6629,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6662,8 +6662,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6695,8 +6695,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6728,8 +6728,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6761,8 +6761,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6794,8 +6794,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6827,8 +6827,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6860,8 +6860,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6893,8 +6893,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6926,8 +6926,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6959,8 +6959,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -6992,8 +6992,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7025,8 +7025,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7058,8 +7058,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7091,8 +7091,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7124,8 +7124,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7157,8 +7157,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7191,8 +7191,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7224,8 +7224,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7257,8 +7257,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7290,8 +7290,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7323,8 +7323,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7357,8 +7357,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7390,8 +7390,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7423,8 +7423,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7456,8 +7456,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7489,8 +7489,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7522,8 +7522,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7555,8 +7555,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7589,8 +7589,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7622,8 +7622,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7655,8 +7655,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7688,8 +7688,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7721,8 +7721,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7754,8 +7754,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7788,8 +7788,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7821,8 +7821,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7854,8 +7854,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7887,8 +7887,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7920,8 +7920,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7953,8 +7953,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -7986,8 +7986,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8019,8 +8019,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8052,8 +8052,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8086,8 +8086,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8119,8 +8119,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8152,8 +8152,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8185,8 +8185,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8218,8 +8218,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8251,8 +8251,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8284,8 +8284,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8317,8 +8317,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8350,8 +8350,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8383,8 +8383,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8416,8 +8416,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8450,8 +8450,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8483,8 +8483,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8517,8 +8517,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8550,8 +8550,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8583,8 +8583,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8616,8 +8616,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8649,8 +8649,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8683,8 +8683,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8716,8 +8716,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8749,8 +8749,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8782,8 +8782,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8815,8 +8815,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8848,8 +8848,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8881,8 +8881,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8914,8 +8914,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8947,8 +8947,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -8980,8 +8980,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9014,8 +9014,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9047,8 +9047,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9080,8 +9080,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9113,8 +9113,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9146,8 +9146,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9179,8 +9179,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9212,8 +9212,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9245,8 +9245,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9278,8 +9278,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9311,8 +9311,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9344,8 +9344,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9377,8 +9377,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 70,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9411,8 +9411,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9444,8 +9444,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9477,8 +9477,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9510,8 +9510,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9543,8 +9543,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9576,8 +9576,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9609,8 +9609,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9642,8 +9642,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9676,8 +9676,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9709,8 +9709,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9742,8 +9742,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9775,8 +9775,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9808,8 +9808,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9841,8 +9841,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9874,8 +9874,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9907,8 +9907,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9940,8 +9940,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -9973,8 +9973,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -10006,8 +10006,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -10040,8 +10040,8 @@ const CITY_CONFIG_2026 = {
       multiKid: 60,
     },
     commercialRate: {
-      first: 3.5,
-      second: 4.1,
+      first: 3.0,
+      second: 3.5,
     },
     fundRate: {
       first: 2.6,
@@ -10067,18 +10067,18 @@ const CITY_CONFIG_2026 = {
 
 // LPR利率（贷款市场报价利率）
 const LPR_2026 = {
-  oneYear: 3.45, // 1年期 LPR
-  fiveYear: 3.95, // 5年期以上 LPR（房贷基准）
+  oneYear: 3.0, // 1年期 LPR（2025年6月起维持）
+  fiveYear: 3.5, // 5年期以上 LPR（房贷基准，2025年5月下调至此）
   lastUpdate: "2026-03-20",
   dataSource: "中国人民银行官网",
   nextUpdateDate: "2026-04-21", // 每月20日更新
-  updateFrequency: "monthly", // monthly / quarterly / yearly
+  updateFrequency: "monthly",
 };
 
 // 数据元信息（Metadata）
 const DATA_METADATA = {
-  version: "2026.03.24",
-  lastUpdate: "2026-03-24 23:30:00",
+  version: "2026.04.05",
+  lastUpdate: "2026-04-05",
   dataSource: {
     lpr: "中国人民银行官网 (www.pbc.gov.cn)",
     fundPolicy: "各地住房公积金管理中心官网",
@@ -10087,22 +10087,27 @@ const DATA_METADATA = {
   },
   cityCount: 304,
   coverageProvinces: 27,
-  nextScheduledUpdate: "2026-04-01", // 下次计划更新时间
+  nextScheduledUpdate: "2026-05-01",
   updateLog: [
     {
-      date: "2026-03-24",
-      changes: "新增257个地级市配置",
-      affectedCities: 257,
-    },
-    {
-      date: "2026-01-20",
-      changes: "LPR利率调整: 5年期以上由4.20%降至3.95%",
+      date: "2026-04-05",
+      changes: "全量利率更新至LPR3.50%基准，四大一线城市首付/限购政策同步更新",
       affectedCities: "all",
     },
     {
-      date: "2026-01-15",
-      changes: "上海公积金家庭最高额度提升至324万",
+      date: "2026-02-25",
+      changes: "上海沪七条：公积金家庭额度提至240万，首套首付降至15%",
       affectedCities: ["上海"],
+    },
+    {
+      date: "2026-01-29",
+      changes: "北京新政：首套首付降至15%，二套首付降至20%，非京籍门槛放宽",
+      affectedCities: ["北京"],
+    },
+    {
+      date: "2025-05-20",
+      changes: "LPR利率调整: 5年期以上由3.70%降至3.50%",
+      affectedCities: "all",
     },
   ],
 };

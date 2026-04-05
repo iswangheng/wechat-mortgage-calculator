@@ -8,43 +8,43 @@ const {
 
 // Historical LPR data for the past 12 months
 const LPR_HISTORY = [
-  { date: "2025-04", oneYear: 3.65, fiveYear: 4.3 },
-  { date: "2025-05", oneYear: 3.65, fiveYear: 4.3 },
-  { date: "2025-07", oneYear: 3.55, fiveYear: 4.2 },
-  { date: "2025-10", oneYear: 3.45, fiveYear: 4.0 },
-  { date: "2026-01", oneYear: 3.45, fiveYear: 3.95 },
-  { date: "2026-03", oneYear: 3.45, fiveYear: 3.95 },
+  { date: "2025-04", oneYear: 3.1, fiveYear: 3.6 },
+  { date: "2025-05", oneYear: 3.0, fiveYear: 3.5 },
+  { date: "2025-07", oneYear: 3.0, fiveYear: 3.5 },
+  { date: "2025-10", oneYear: 3.0, fiveYear: 3.5 },
+  { date: "2026-01", oneYear: 3.0, fiveYear: 3.5 },
+  { date: "2026-03", oneYear: 3.0, fiveYear: 3.5 },
 ];
 
 // LPR adjustment timeline records
 const LPR_ADJUSTMENTS = [
   {
-    date: "2026-01-20",
-    change: "5年期LPR下调5BP",
-    detail: "5年期以上LPR从4.00%下调至3.95%",
-    impact: "100万30年商贷月供减少约29元",
-    direction: "down",
+    date: "2026-03-20",
+    change: "LPR保持不变",
+    detail: "1年期3.00%，5年期3.50%，连续第10个月持平",
+    impact: "无变化",
+    direction: "flat",
   },
   {
-    date: "2025-10-21",
+    date: "2025-05-20",
     change: "双降：1年期-10BP，5年期-20BP",
-    detail: "1年期3.55%->3.45%，5年期4.20%->4.00%",
+    detail: "1年期3.10%→3.00%，5年期3.70%→3.50%",
     impact: "100万30年商贷月供减少约116元",
-    direction: "down",
-  },
-  {
-    date: "2025-07-21",
-    change: "双降：1年期-10BP，5年期-10BP",
-    detail: "1年期3.65%->3.55%，5年期4.30%->4.20%",
-    impact: "100万30年商贷月供减少约58元",
     direction: "down",
   },
   {
     date: "2025-04-21",
     change: "LPR保持不变",
-    detail: "1年期3.65%，5年期4.30%，连续第二月持平",
+    detail: "1年期3.10%，5年期3.70%，维持不变",
     impact: "无变化",
     direction: "flat",
+  },
+  {
+    date: "2025-02-20",
+    change: "5年期LPR下调25BP",
+    detail: "5年期以上LPR从3.95%下调至3.70%",
+    impact: "100万30年商贷月供减少约145元",
+    direction: "down",
   },
 ];
 

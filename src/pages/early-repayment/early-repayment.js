@@ -5,7 +5,7 @@ Page({
   data: {
     // 原贷款信息
     originalPrincipal: "", // 原贷款总额（万元）
-    annualRate: 3.3, // 年利率
+    annualRate: 2.9, // 年利率
     years: 30, // 贷款年限
     method: "等额本息", // 还款方式
 

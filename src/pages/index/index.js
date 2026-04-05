@@ -14,10 +14,10 @@ const { saveHistory } = require("../../utils/history-manager");
 
 // City recommended defaults
 const CITY_DEFAULTS = {
-  上海: { housePrice: 500, years: 30, downPaymentRatio: 35 },
-  北京: { housePrice: 500, years: 30, downPaymentRatio: 35 },
-  深圳: { housePrice: 450, years: 30, downPaymentRatio: 30 },
-  广州: { housePrice: 300, years: 30, downPaymentRatio: 30 },
+  上海: { housePrice: 500, years: 30, downPaymentRatio: 15 },
+  北京: { housePrice: 500, years: 30, downPaymentRatio: 15 },
+  深圳: { housePrice: 450, years: 30, downPaymentRatio: 15 },
+  广州: { housePrice: 300, years: 30, downPaymentRatio: 15 },
   杭州: { housePrice: 350, years: 30, downPaymentRatio: 30 },
   成都: { housePrice: 200, years: 25, downPaymentRatio: 30 },
   南京: { housePrice: 300, years: 30, downPaymentRatio: 30 },
@@ -100,7 +100,7 @@ Page({
 
     // 商业贷款
     commercialPrincipal: "", // 商贷本金（万元）
-    commercialRate: 3.3, // 商贷利率
+    commercialRate: 2.9, // 商贷利率
 
     // 公积金贷款
     fundPrincipal: "", // 公积金本金（万元）

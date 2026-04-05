@@ -6,7 +6,7 @@ Page({
   data: {
     cityName: "上海",
     principal: "", // 贷款本金（万元）
-    annualRate: 3.3, // 年利率
+    annualRate: 2.9, // 年利率
     years: 30, // 贷款年限
     loanType: "commercial", // 贷款类型
     comparison: null, // 对比结果
