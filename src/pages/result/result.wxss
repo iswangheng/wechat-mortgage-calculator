@@ -80,6 +80,7 @@
 .overview-label {
   font-size: 24rpx;
   color: #999999;
+  white-space: nowrap;
 }
 
 .overview-value {

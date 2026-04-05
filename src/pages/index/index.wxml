@@ -2,15 +2,13 @@
 <view class="container">
 
   <!-- 数据更新时间提示 -->
-  <view class="data-freshness-banner">
-    <view class="freshness-content">
-      <text class="freshness-icon">📅</text>
-      <text class="freshness-text">数据更新于: {{dataUpdateTime}}</text>
+  <view class="data-freshness-banner" bindtap="onShowDataSource">
+    <view class="freshness-left">
       <text class="freshness-tag {{dataFreshness.status}}">{{dataFreshness.label}}</text>
+      <text class="freshness-text">{{dataUpdateDate}}</text>
     </view>
-    <view class="data-source-btn" bindtap="onShowDataSource">
-      <text class="source-icon">ℹ️</text>
-      <text class="source-text">数据来源</text>
+    <view class="freshness-right">
+      <text class="source-text">数据来源 ›</text>
     </view>
   </view>
 

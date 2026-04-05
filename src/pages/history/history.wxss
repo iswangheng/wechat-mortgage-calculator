@@ -104,6 +104,7 @@
   font-weight: 500;
   margin-left: 16rpx;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .card-type.type-commercial {

@@ -77,6 +77,7 @@ Page({
   data: {
     // 数据更新信息
     dataUpdateTime: "",
+    dataUpdateDate: "",
     dataFreshness: { status: "fresh", label: "最新" },
 
     // 城市信息
@@ -212,8 +213,12 @@ Page({
     const metadata = getDataMetadata();
     const freshness = checkDataFreshness();
 
+    // Only show date, not time
+    const updateDate = (metadata.lastUpdate || "").split(" ")[0];
+
     this.setData({
       dataUpdateTime: metadata.lastUpdate,
+      dataUpdateDate: updateDate,
       dataFreshness: freshness,
     });
 
@@ -229,29 +234,33 @@ Page({
 
   // 显示数据来源
   onShowDataSource() {
-    const metadata = getDataMetadata();
-    const lprInfo = metadata.lprInfo;
+    try {
+      const metadata = getDataMetadata();
+      const { LPR_2026 } = require("../../config/cities-2026");
 
-    let content = "📊 数据来源\n\n";
-    content += `• LPR利率: ${metadata.dataSource.lpr}\n`;
-    content += `• 公积金政策: ${metadata.dataSource.fundPolicy}\n`;
-    content += `• 商贷利率: ${metadata.dataSource.commercialRate}\n`;
-    content += `• 限购政策: ${metadata.dataSource.purchasePolicy}\n\n`;
-    content += `📅 数据版本: ${metadata.version}\n`;
-    content += `📅 最后更新: ${metadata.lastUpdate}\n`;
-    content += `📅 下次更新: ${metadata.nextScheduledUpdate}\n\n`;
-    content += `🏦 当前LPR:\n`;
-    content += `   1年期: ${lprInfo.oneYear}%\n`;
-    content += `   5年期: ${lprInfo.fiveYear}% (房贷基准)\n\n`;
-    content += `📈 覆盖范围:\n`;
-    content += `   ${metadata.cityCount}个城市 / ${metadata.coverageProvinces}个省份`;
+      let content = "";
+      content += `LPR利率: ${metadata.dataSource.lpr}\n`;
+      content += `公积金政策: ${metadata.dataSource.fundPolicy}\n`;
+      content += `商贷利率: ${metadata.dataSource.commercialRate}\n`;
+      content += `限购政策: ${metadata.dataSource.purchasePolicy}\n\n`;
+      content += `当前LPR:\n`;
+      content += `  1年期: ${LPR_2026.oneYear}%\n`;
+      content += `  5年期: ${LPR_2026.fiveYear}% (房贷基准)\n\n`;
+      content += `数据版本: ${metadata.version}\n`;
+      content += `最后更新: ${metadata.lastUpdate}\n`;
+      content += `下次更新: ${metadata.nextScheduledUpdate}\n`;
+      content += `覆盖: ${metadata.cityCount}城市 / ${metadata.coverageProvinces}省份`;
 
-    wx.showModal({
-      title: "数据来源",
-      content: content,
-      showCancel: false,
-      confirmText: "我知道了",
-    });
+      wx.showModal({
+        title: "数据来源与说明",
+        content: content,
+        showCancel: false,
+        confirmText: "我知道了",
+      });
+    } catch (e) {
+      console.error("显示数据来源失败:", e);
+      wx.showToast({ title: "加载数据来源失败", icon: "none" });
+    }
   },
 
   // 加载城市配置

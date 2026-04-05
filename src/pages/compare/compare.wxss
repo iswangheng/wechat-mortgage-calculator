@@ -104,6 +104,8 @@
   font-size: 28rpx;
   color: #999999;
   margin-left: 12rpx;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* 年限选择器 */
