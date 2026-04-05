@@ -306,4 +306,68 @@
     <button class="btn-detail" bindtap="onViewDetail">查看还款明细</button>
   </view>
 
+  <!-- 数据来源自定义弹窗 -->
+  <view class="modal-overlay {{showDataSourceModal ? 'show' : ''}}" catchtap="onCloseDataSource">
+    <view class="modal-card" catchtap="">
+      <view class="modal-header">
+        <text class="modal-title">数据来源</text>
+        <view class="modal-close" bindtap="onCloseDataSource">✕</view>
+      </view>
+
+      <view class="modal-body" wx:if="{{dataSourceInfo}}">
+        <!-- LPR 利率高亮卡 -->
+        <view class="ds-lpr-card">
+          <view class="ds-lpr-item">
+            <text class="ds-lpr-label">1年期 LPR</text>
+            <text class="ds-lpr-value">{{dataSourceInfo.lpr.oneYear}}%</text>
+          </view>
+          <view class="ds-lpr-divider"></view>
+          <view class="ds-lpr-item">
+            <text class="ds-lpr-label">5年期 LPR</text>
+            <text class="ds-lpr-value accent">{{dataSourceInfo.lpr.fiveYear}}%</text>
+            <text class="ds-lpr-badge">房贷基准</text>
+          </view>
+        </view>
+
+        <!-- 数据来源列表 -->
+        <view class="ds-section">
+          <text class="ds-section-title">数据来源渠道</text>
+          <view class="ds-source-list">
+            <view class="ds-source-item" wx:for="{{dataSourceInfo.sources}}" wx:key="label">
+              <text class="ds-source-label">{{item.label}}</text>
+              <text class="ds-source-value">{{item.value}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 版本与覆盖 -->
+        <view class="ds-section">
+          <text class="ds-section-title">版本信息</text>
+          <view class="ds-meta-grid">
+            <view class="ds-meta-item">
+              <text class="ds-meta-value">{{dataSourceInfo.version}}</text>
+              <text class="ds-meta-label">数据版本</text>
+            </view>
+            <view class="ds-meta-item">
+              <text class="ds-meta-value">{{dataSourceInfo.lastUpdate}}</text>
+              <text class="ds-meta-label">最后更新</text>
+            </view>
+            <view class="ds-meta-item">
+              <text class="ds-meta-value">{{dataSourceInfo.nextUpdate}}</text>
+              <text class="ds-meta-label">下次更新</text>
+            </view>
+            <view class="ds-meta-item">
+              <text class="ds-meta-value">{{dataSourceInfo.cityCount}}</text>
+              <text class="ds-meta-label">覆盖城市</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="modal-footer">
+        <button class="modal-btn" bindtap="onCloseDataSource">我知道了</button>
+      </view>
+    </view>
+  </view>
+
 </view>

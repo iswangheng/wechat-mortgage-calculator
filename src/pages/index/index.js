@@ -79,6 +79,8 @@ Page({
     dataUpdateTime: "",
     dataUpdateDate: "",
     dataFreshness: { status: "fresh", label: "最新" },
+    showDataSourceModal: false,
+    dataSourceInfo: null,
 
     // 城市信息
     cityName: "上海",
@@ -238,29 +240,35 @@ Page({
       const metadata = getDataMetadata();
       const { LPR_2026 } = require("../../config/cities-2026");
 
-      let content = "";
-      content += `LPR利率: ${metadata.dataSource.lpr}\n`;
-      content += `公积金政策: ${metadata.dataSource.fundPolicy}\n`;
-      content += `商贷利率: ${metadata.dataSource.commercialRate}\n`;
-      content += `限购政策: ${metadata.dataSource.purchasePolicy}\n\n`;
-      content += `当前LPR:\n`;
-      content += `  1年期: ${LPR_2026.oneYear}%\n`;
-      content += `  5年期: ${LPR_2026.fiveYear}% (房贷基准)\n\n`;
-      content += `数据版本: ${metadata.version}\n`;
-      content += `最后更新: ${metadata.lastUpdate}\n`;
-      content += `下次更新: ${metadata.nextScheduledUpdate}\n`;
-      content += `覆盖: ${metadata.cityCount}城市 / ${metadata.coverageProvinces}省份`;
-
-      wx.showModal({
-        title: "数据来源与说明",
-        content: content,
-        showCancel: false,
-        confirmText: "我知道了",
+      this.setData({
+        showDataSourceModal: true,
+        dataSourceInfo: {
+          sources: [
+            { label: "LPR利率", value: "中国人民银行官网" },
+            { label: "公积金政策", value: "各地公积金中心" },
+            { label: "商贷利率", value: "各大银行官网" },
+            { label: "限购政策", value: "各地房管局" },
+          ],
+          lpr: {
+            oneYear: LPR_2026.oneYear,
+            fiveYear: LPR_2026.fiveYear,
+          },
+          version: metadata.version,
+          lastUpdate: (metadata.lastUpdate || "").split(" ")[0],
+          nextUpdate: metadata.nextScheduledUpdate,
+          cityCount: metadata.cityCount,
+          provinces: metadata.coverageProvinces,
+        },
       });
     } catch (e) {
       console.error("显示数据来源失败:", e);
-      wx.showToast({ title: "加载数据来源失败", icon: "none" });
+      wx.showToast({ title: "加载失败", icon: "none" });
     }
+  },
+
+  // 关闭数据来源弹窗
+  onCloseDataSource() {
+    this.setData({ showDataSourceModal: false });
   },
 
   // 加载城市配置
