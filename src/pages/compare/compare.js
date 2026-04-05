@@ -109,6 +109,17 @@ Page({
         years,
       );
 
+      // Format numbers with thousand separators
+      comparison.equalPayment.monthlyPayment = this.formatNumber(comparison.equalPayment.monthlyPayment);
+      comparison.equalPayment.totalInterest = this.formatNumber(comparison.equalPayment.totalInterest);
+      comparison.equalPayment.totalPayment = this.formatNumber(comparison.equalPayment.totalPayment);
+      comparison.equalPrincipal.firstMonthPayment = this.formatNumber(comparison.equalPrincipal.firstMonthPayment);
+      comparison.equalPrincipal.lastMonthPayment = this.formatNumber(comparison.equalPrincipal.lastMonthPayment);
+      comparison.equalPrincipal.totalInterest = this.formatNumber(comparison.equalPrincipal.totalInterest);
+      comparison.equalPrincipal.totalPayment = this.formatNumber(comparison.equalPrincipal.totalPayment);
+      comparison.savedInterest = this.formatNumber(comparison.savedInterest);
+      comparison.firstMonthDiff = this.formatNumber(comparison.firstMonthDiff);
+
       this.setData({ comparison });
 
       wx.showToast({ title: "对比完成", icon: "success" });
@@ -123,6 +134,15 @@ Page({
     this.setData({
       principal: "",
       comparison: null,
+    });
+  },
+
+  // Format number with thousand separators
+  formatNumber(num) {
+    if (!num && num !== 0) return "0";
+    return parseFloat(num).toLocaleString("zh-CN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     });
   },
 });

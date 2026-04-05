@@ -137,7 +137,7 @@
       <text class="label">贷款利率</text>
       <input
         type="digit"
-        placeholder="当前LPR 3.95%"
+        placeholder="请输入商贷利率"
         value="{{commercialRate}}"
         bindinput="onCommercialRateInput"
         class="input-number"/>

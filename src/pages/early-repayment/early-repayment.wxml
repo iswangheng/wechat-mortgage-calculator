@@ -55,6 +55,12 @@
             20年
           </view>
           <view
+            class="year-item {{years === 25 ? 'active' : ''}}"
+            bindtap="onYearsChange"
+            data-years="25">
+            25年
+          </view>
+          <view
             class="year-item {{years === 30 ? 'active' : ''}}"
             bindtap="onYearsChange"
             data-years="30">

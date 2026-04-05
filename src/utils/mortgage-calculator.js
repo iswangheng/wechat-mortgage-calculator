@@ -365,6 +365,7 @@ function calculateEarlyRepayment(params) {
           original.schedule
             .slice(0, paidMonths)
             .reduce((sum, m) => sum + m.monthlyPayment, 0),
+        newTotalInterest: newLoan.totalInterest,
         savedInterest:
           original.totalInterest -
           newLoan.totalInterest -

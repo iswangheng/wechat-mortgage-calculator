@@ -121,23 +121,32 @@ Page({
     } = this.data;
 
     // 验证输入
-    if (!originalPrincipal || originalPrincipal <= 0) {
-      wx.showToast({ title: "请输入原贷款总额", icon: "none" });
+    const principalVal = parseFloat(originalPrincipal);
+    if (!principalVal || isNaN(principalVal) || principalVal <= 0) {
+      wx.showToast({ title: "请输入有效的贷款总额", icon: "none" });
       return;
     }
 
-    if (!paidMonths || paidMonths <= 0) {
-      wx.showToast({ title: "请输入已还月数", icon: "none" });
+    const paidMonthsVal = parseInt(paidMonths);
+    if (!paidMonthsVal || isNaN(paidMonthsVal) || paidMonthsVal <= 0) {
+      wx.showToast({ title: "请输入有效的已还月数", icon: "none" });
       return;
     }
 
-    if (!earlyAmount || earlyAmount <= 0) {
-      wx.showToast({ title: "请输入提前还款金额", icon: "none" });
+    const earlyAmountVal = parseFloat(earlyAmount);
+    if (!earlyAmountVal || isNaN(earlyAmountVal) || earlyAmountVal <= 0) {
+      wx.showToast({ title: "请输入有效的提前还款金额", icon: "none" });
+      return;
+    }
+
+    const rateVal = parseFloat(annualRate);
+    if (!rateVal || isNaN(rateVal) || rateVal < 0.1 || rateVal > 24) {
+      wx.showToast({ title: "利率必须在0.1%-24%之间", icon: "none" });
       return;
     }
 
     const totalMonths = years * 12;
-    if (parseInt(paidMonths) >= totalMonths) {
+    if (paidMonthsVal >= totalMonths) {
       wx.showToast({ title: "已还月数不能超过总月数", icon: "none" });
       return;
     }
