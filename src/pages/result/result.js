@@ -56,6 +56,17 @@ Page({
       combination: "\u7ec4\u5408\u8d37\u6b3e",
     };
 
+    // Add wan (万) formatted values for overview display
+    const resultData = calcResult.result;
+    const toWan = (str) => {
+      if (!str) return '0';
+      const num = parseFloat(String(str).replace(/,/g, ''));
+      return isNaN(num) ? '0' : (num / 10000).toFixed(1);
+    };
+    resultData.principalWan = toWan(resultData.principal);
+    resultData.totalInterestWan = toWan(resultData.totalInterest);
+    resultData.totalPaymentWan = toWan(resultData.totalPayment);
+
     this.setData({
       cityName: calcResult.cityName,
       loanType: calcResult.loanType,
@@ -63,7 +74,7 @@ Page({
       method: calcResult.method,
       years: calcResult.years,
       annualRate: calcResult.annualRate || 0,
-      result: calcResult.result,
+      result: resultData,
     });
 
     // Generate repayment schedule

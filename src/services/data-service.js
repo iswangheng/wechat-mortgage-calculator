@@ -26,7 +26,9 @@ async function init() {
 
   // 2. Try fetching fresh data from cloud (async, non-blocking)
   try {
-    if (!wx.cloud) return;
+    // Skip if cloud is not available or not initialized
+    const app = getApp();
+    if (!wx.cloud || !app || !app.globalData.cloudEnvId) return;
 
     const res = await wx.cloud.callFunction({
       name: 'getLatestData',

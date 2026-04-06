@@ -55,26 +55,31 @@
   padding: 30rpx;
   margin-bottom: 20rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.overview-row {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.overview-row:last-child {
+  margin-bottom: 0;
 }
 
 .overview-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12rpx;
+  gap: 10rpx;
+  padding: 20rpx 16rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
 }
 
-.overview-item.main {
-  flex: 1;
-}
-
-.overview-divider {
-  width: 2rpx;
-  height: 80rpx;
-  background: #e9ecef;
+.overview-item.full {
+  background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
 }
 
 .overview-label {
@@ -84,18 +89,22 @@
 }
 
 .overview-value {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
   color: #333333;
 }
 
 .overview-value.primary {
-  font-size: 40rpx;
   color: #1677FF;
 }
 
 .overview-value.warning {
   color: #f5576c;
+}
+
+.overview-value.total {
+  font-size: 38rpx;
+  color: #1677FF;
 }
 
 /* 月供信息 */

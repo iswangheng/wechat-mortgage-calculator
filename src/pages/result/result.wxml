@@ -26,19 +26,21 @@
 
   <!-- 还款总览 -->
   <view class="overview-card">
-    <view class="overview-item main">
-      <text class="overview-label">贷款总额</text>
-      <text class="overview-value primary">¥{{result.principal}}</text>
+    <view class="overview-row">
+      <view class="overview-item">
+        <text class="overview-label">贷款总额</text>
+        <text class="overview-value primary">{{result.principalWan}}万</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-label">支付利息</text>
+        <text class="overview-value warning">{{result.totalInterestWan}}万</text>
+      </view>
     </view>
-    <view class="overview-divider"></view>
-    <view class="overview-item">
-      <text class="overview-label">支付利息</text>
-      <text class="overview-value warning">¥{{result.totalInterest}}</text>
-    </view>
-    <view class="overview-divider"></view>
-    <view class="overview-item">
-      <text class="overview-label">还款总额</text>
-      <text class="overview-value">¥{{result.totalPayment}}</text>
+    <view class="overview-row">
+      <view class="overview-item full">
+        <text class="overview-label">还款总额</text>
+        <text class="overview-value total">{{result.totalPaymentWan}}万</text>
+      </view>
     </view>
   </view>
 
