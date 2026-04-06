@@ -481,6 +481,13 @@ Page({
       });
   },
 
+  // Helper: format yuan to wan
+  _toWan(str) {
+    if (!str) return '0';
+    const num = parseFloat(String(str).replace(/,/g, ''));
+    return isNaN(num) ? '0' : (num / 10000).toFixed(1) + '万';
+  },
+
   // Draw the share card on canvas
   drawShareCard(ctx, W, H) {
     const { result, cityName, loanTypeName, method, years } = this.data;
@@ -501,7 +508,7 @@ Page({
     ctx.font = "bold 28px sans-serif";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
-    ctx.fillText("房贷计算结果", W / 2, 60);
+    ctx.fillText("买房月供计算结果", W / 2, 60);
 
     // Subtitle: city + loan type
     ctx.font = "16px sans-serif";
@@ -521,7 +528,7 @@ Page({
     ctx.fillText("生成日期: " + dateStr, W / 2, 125);
 
     // White content card
-    this.roundRectPath(ctx, 30, 160, W - 60, 460, 16);
+    this.roundRectPath(ctx, 30, 160, W - 60, 380, 16);
     ctx.fillStyle = "#ffffff";
     ctx.fill();
     ctx.strokeStyle = "#e9ecef";
@@ -538,24 +545,24 @@ Page({
     ctx.textAlign = "center";
     ctx.fillText(monthlyLabel, W / 2, 210);
 
-    ctx.font = "bold 40px sans-serif";
+    ctx.font = "bold 36px sans-serif";
     ctx.fillStyle = "#1677FF";
-    ctx.fillText("\u00A5" + monthlyValue, W / 2, 265);
+    ctx.fillText("\u00A5" + monthlyValue, W / 2, 258);
 
     // Divider
     ctx.beginPath();
-    ctx.moveTo(60, 295);
-    ctx.lineTo(W - 60, 295);
+    ctx.moveTo(60, 285);
+    ctx.lineTo(W - 60, 285);
     ctx.strokeStyle = "#f0f0f0";
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Data grid: 2x2 layout
+    // Data grid: 2x2 layout — use wan (万) format
     const gridData = [
-      { label: "贷款总额", value: "\u00A5" + result.principal },
+      { label: "贷款总额", value: this._toWan(result.principal) },
       { label: "还款年限", value: years + "年" },
-      { label: "支付利息", value: "\u00A5" + result.totalInterest },
-      { label: "还款总额", value: "\u00A5" + result.totalPayment },
+      { label: "支付利息", value: this._toWan(result.totalInterest) },
+      { label: "还款总额", value: this._toWan(result.totalPayment) },
     ];
 
     const colW = (W - 60) / 2;
@@ -563,7 +570,7 @@ Page({
       const col = i % 2;
       const row = Math.floor(i / 2);
       const x = 30 + col * colW + colW / 2;
-      const y = 330 + row * 100;
+      const y = 315 + row * 90;
 
       ctx.font = "13px sans-serif";
       ctx.fillStyle = "#999999";
@@ -572,7 +579,7 @@ Page({
 
       ctx.font = "bold 20px sans-serif";
       ctx.fillStyle = "#333333";
-      ctx.fillText(item.value, x, y + 30);
+      ctx.fillText(item.value, x, y + 28);
     });
 
     // Last month payment for equal principal method
@@ -580,22 +587,40 @@ Page({
       ctx.font = "13px sans-serif";
       ctx.fillStyle = "#999999";
       ctx.textAlign = "center";
-      ctx.fillText("末月月供: \u00A5" + result.lastMonthPayment, W / 2, 560);
+      ctx.fillText("末月月供: \u00A5" + result.lastMonthPayment, W / 2, 510);
     }
 
-    // Bottom section: app info
+    // Bottom section: mini program QR code prompt + app name
     ctx.fillStyle = "#f8f9fa";
-    this.roundRectPath(ctx, 30, 640, W - 60, 80, 12);
+    this.roundRectPath(ctx, 30, 560, W - 60, 100, 12);
     ctx.fill();
 
-    ctx.font = "bold 15px sans-serif";
+    // QR code placeholder circle
+    ctx.beginPath();
+    ctx.arc(100, 610, 30, 0, Math.PI * 2);
+    ctx.fillStyle = "#e8f0fe";
+    ctx.fill();
+    ctx.strokeStyle = "#1677FF";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // QR icon in circle
+    ctx.font = "24px sans-serif";
     ctx.fillStyle = "#1677FF";
     ctx.textAlign = "center";
-    ctx.fillText("房贷计算器 2026", W / 2, 670);
+    ctx.textBaseline = "middle";
+    ctx.fillText("\u{1F4F1}", 100, 610);
+    ctx.textBaseline = "alphabetic";
+
+    // App name and hint
+    ctx.font = "bold 16px sans-serif";
+    ctx.fillStyle = "#1677FF";
+    ctx.textAlign = "left";
+    ctx.fillText("买房月供计算器", 150, 600);
 
     ctx.font = "12px sans-serif";
     ctx.fillStyle = "#999999";
-    ctx.fillText("长按识别查看详情", W / 2, 698);
+    ctx.fillText("微信搜索小程序，免费使用", 150, 625);
 
     // Watermark disclaimer
     ctx.font = "11px sans-serif";

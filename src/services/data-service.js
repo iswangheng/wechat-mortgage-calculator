@@ -1,10 +1,12 @@
 // Data service layer
-// Priority: Cloud DB → Storage Cache → Local fallback (cities-2026.js)
+// Priority: Cloud DB (direct) → Storage Cache → Local fallback (cities-2026.js)
+// Uses direct DB queries instead of cloud functions to avoid timeout issues
 
 const localConfig = require('../config/cities-2026');
 
 const CACHE_KEY = 'mortgage_cloud_data';
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+const DB_COLLECTION = 'mortgage_config';
 
 // In-memory store for the active session
 let _cloudData = null;
@@ -24,39 +26,72 @@ async function init() {
     _cloudData = cached;
   }
 
-  // 2. Try fetching fresh data from cloud (async, non-blocking)
+  // 2. Try fetching fresh data directly from cloud DB (no cloud function needed)
+  fetchFromCloudDB();
+}
+
+/**
+ * Fetch data directly from cloud database (non-blocking, async)
+ * Only fetches LPR + metadata (2 docs) — fast and reliable
+ * City configs stay local (rarely change, 300+ docs too heavy)
+ */
+async function fetchFromCloudDB() {
   try {
-    // Skip if cloud is not available or not initialized
     const app = getApp();
     if (!wx.cloud || !app || !app.globalData.cloudEnvId) return;
 
-    const res = await wx.cloud.callFunction({
-      name: 'getLatestData',
-      config: {
-        timeout: 15000, // 15 seconds client-side timeout
-      },
+    const db = wx.cloud.database();
+    const _ = db.command;
+
+    // Only fetch LPR and metadata (2 documents, instant)
+    const { data } = await db.collection(DB_COLLECTION)
+      .where({ type: _.in(['lpr', 'metadata']) })
+      .get();
+
+    if (!data || data.length === 0) return;
+
+    // Build cloud data object, keep existing city data from cache
+    const result = {
+      lpr: _cloudData ? _cloudData.lpr : null,
+      metadata: _cloudData ? _cloudData.metadata : null,
+      cities: _cloudData ? _cloudData.cities : null,
+    };
+
+    data.forEach((doc) => {
+      if (doc.type === 'lpr') {
+        result.lpr = {
+          oneYear: doc.oneYear,
+          fiveYear: doc.fiveYear,
+          lastUpdate: doc.lastUpdate,
+          dataSource: doc.dataSource || '中国人民银行官网',
+        };
+      } else if (doc.type === 'metadata') {
+        result.metadata = {
+          version: doc.version,
+          lastUpdate: doc.lastUpdate,
+          nextScheduledUpdate: doc.nextScheduledUpdate,
+          cityCount: doc.cityCount,
+          coverageProvinces: doc.coverageProvinces,
+          dataSource: doc.dataSource,
+        };
+      }
     });
 
-    if (res && res.result && res.result.success) {
-      _cloudData = res.result.data;
-      saveToCache(_cloudData);
-    }
+    _cloudData = result;
+    saveToCache(_cloudData);
   } catch (e) {
-    // Timeout or network error — silently use local/cached data
-    console.warn('Cloud data fetch skipped:', e.message || e);
+    // Silently use local/cached data
+    console.warn('Cloud DB fetch skipped:', e.message || e);
   }
 }
 
 /**
  * Get city config by name
- * Mirrors the API of cities-2026.getCityConfig()
  */
 function getCityConfig(cityName) {
-  // Cloud data available → use it
   if (_cloudData && _cloudData.cities && _cloudData.cities[cityName]) {
     return _cloudData.cities[cityName];
   }
-  // Fallback to local
   return localConfig.getCityConfig(cityName);
 }
 
@@ -71,7 +106,7 @@ function getLPR() {
 }
 
 /**
- * Get data metadata (version, update time, sources, etc.)
+ * Get data metadata
  */
 function getDataMetadata() {
   if (_cloudData && _cloudData.metadata) {
@@ -112,7 +147,6 @@ function checkDataFreshness() {
  * Get cities grouped by level
  */
 function getCitiesByLevel() {
-  // If cloud data has cities, group them
   if (_cloudData && _cloudData.cities) {
     const result = { '一线': [], '新一线': [], '二线': [], '其他': [] };
     Object.keys(_cloudData.cities).forEach((name) => {
@@ -130,7 +164,7 @@ function getCitiesByLevel() {
 }
 
 /**
- * Whether cloud data is active (for UI indicators)
+ * Whether cloud data is active
  */
 function isCloudDataActive() {
   return _cloudData !== null;
