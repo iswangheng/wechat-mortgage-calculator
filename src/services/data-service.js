@@ -30,13 +30,12 @@ async function init() {
     const app = getApp();
     if (!wx.cloud || !app || !app.globalData.cloudEnvId) return;
 
-    // Race cloud call against a 5-second timeout
-    const res = await Promise.race([
-      wx.cloud.callFunction({ name: 'getLatestData' }),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Cloud fetch timeout')), 5000)
-      ),
-    ]);
+    const res = await wx.cloud.callFunction({
+      name: 'getLatestData',
+      config: {
+        timeout: 15000, // 15 seconds client-side timeout
+      },
+    });
 
     if (res && res.result && res.result.success) {
       _cloudData = res.result.data;
