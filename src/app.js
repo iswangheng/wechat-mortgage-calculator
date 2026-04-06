@@ -6,7 +6,7 @@ App({
     userInfo: null,
     calculationResult: null,
     selectedCity: "上海",
-    cloudEnvId: "", // Fill in your cloud environment ID after setup
+    cloudEnvId: "cloud1-5gx1gdv3e8e99360",
   },
 
   onLaunch() {
