@@ -301,27 +301,27 @@ function calculateEarlyRepayment(params) {
       },
       afterEarlyPayment: {
         earlyAmount: earlyAmount,
-        newPrincipal,
+        newPrincipal: Math.round(newPrincipal * 100) / 100,
         newYears: Math.round(newYears * 100) / 100,
         monthlyPayment:
           method === "等额本金"
             ? newLoan.firstMonthPayment
             : newLoan.monthlyPayment,
-        newTotalPayment:
-          newLoan.totalPayment +
+        newTotalPayment: Math.round(
+          (newLoan.totalPayment +
           original.schedule
             .slice(0, paidMonths)
-            .reduce((sum, m) => sum + m.monthlyPayment, 0),
-        newTotalInterest: newLoan.totalInterest,
+            .reduce((sum, m) => sum + m.monthlyPayment, 0)) * 100) / 100,
+        newTotalInterest: Math.round(newLoan.totalInterest * 100) / 100,
         savedMonths: remainingMonths - newMonths,
-        savedInterest:
-          original.totalInterest -
+        savedInterest: Math.round(
+          (original.totalInterest -
           newLoan.totalInterest -
           (paidMonths > 0
             ? original.schedule
                 .slice(0, paidMonths)
                 .reduce((sum, m) => sum + m.interestPayment, 0)
-            : 0),
+            : 0)) * 100) / 100,
       },
     };
   } else {
@@ -356,24 +356,24 @@ function calculateEarlyRepayment(params) {
       },
       afterEarlyPayment: {
         earlyAmount: earlyAmount,
-        newPrincipal,
+        newPrincipal: Math.round(newPrincipal * 100) / 100,
         newYears: Math.round(remainingYears * 100) / 100,
         monthlyPayment: newMonthly,
         reducedMonthly: Math.round((originalMonthly - newMonthly) * 100) / 100,
-        newTotalPayment:
-          newLoan.totalPayment +
+        newTotalPayment: Math.round(
+          (newLoan.totalPayment +
           original.schedule
             .slice(0, paidMonths)
-            .reduce((sum, m) => sum + m.monthlyPayment, 0),
-        newTotalInterest: newLoan.totalInterest,
-        savedInterest:
-          original.totalInterest -
+            .reduce((sum, m) => sum + m.monthlyPayment, 0)) * 100) / 100,
+        newTotalInterest: Math.round(newLoan.totalInterest * 100) / 100,
+        savedInterest: Math.round(
+          (original.totalInterest -
           newLoan.totalInterest -
           (paidMonths > 0
             ? original.schedule
                 .slice(0, paidMonths)
                 .reduce((sum, m) => sum + m.interestPayment, 0)
-            : 0),
+            : 0)) * 100) / 100,
       },
     };
   }

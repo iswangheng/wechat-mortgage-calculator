@@ -174,8 +174,8 @@ Page({
         },
         afterEarlyPayment: {
           earlyAmount: result.afterEarlyPayment.earlyAmount,
-          newPrincipal: result.afterEarlyPayment.newPrincipal,
-          newYears: result.afterEarlyPayment.newYears,
+          newPrincipal: this.formatWan(result.afterEarlyPayment.newPrincipal),
+          newYears: this.formatYears(result.afterEarlyPayment.newYears),
           monthlyPayment: this.formatNumber(
             result.afterEarlyPayment.monthlyPayment,
           ),
@@ -189,7 +189,9 @@ Page({
             result.afterEarlyPayment.savedInterest,
           ),
           savedMonths: result.afterEarlyPayment.savedMonths || 0,
-          reducedMonthly: result.afterEarlyPayment.reducedMonthly || 0,
+          reducedMonthly: this.formatNumber(
+            result.afterEarlyPayment.reducedMonthly || 0,
+          ),
         },
       };
 
@@ -218,11 +220,24 @@ Page({
     this.updateComputedData();
   },
 
-  // 格式化数字（添加千分位）
+  // Format number: fix to 2 decimal places + thousand separators
   formatNumber(num) {
+    if (!num && num !== 0) return "0.00";
+    return parseFloat(num).toLocaleString("zh-CN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  },
+
+  // Format wan (万元): round to 2 decimal places
+  formatWan(num) {
     if (!num && num !== 0) return "0";
-    const parts = num.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
+    return parseFloat(parseFloat(num).toFixed(2));
+  },
+
+  // Format years: round to 1 decimal place
+  formatYears(num) {
+    if (!num && num !== 0) return "0";
+    return parseFloat(parseFloat(num).toFixed(1));
   },
 });
