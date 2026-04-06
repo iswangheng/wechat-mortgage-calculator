@@ -30,16 +30,21 @@ async function init() {
     const app = getApp();
     if (!wx.cloud || !app || !app.globalData.cloudEnvId) return;
 
-    const res = await wx.cloud.callFunction({
-      name: 'getLatestData',
-    });
+    // Race cloud call against a 5-second timeout
+    const res = await Promise.race([
+      wx.cloud.callFunction({ name: 'getLatestData' }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Cloud fetch timeout')), 5000)
+      ),
+    ]);
 
     if (res && res.result && res.result.success) {
       _cloudData = res.result.data;
       saveToCache(_cloudData);
     }
   } catch (e) {
-    console.warn('Cloud data fetch failed, using fallback:', e.message || e);
+    // Timeout or network error — silently use local/cached data
+    console.warn('Cloud data fetch skipped:', e.message || e);
   }
 }
 

@@ -1,19 +1,33 @@
 // Cloud function: getLatestData
 // Returns latest mortgage data (LPR, city configs, metadata) from cloud DB
+// Uses pagination to handle 300+ documents (cloud DB limit: 100 per query)
 
 const cloud = require('wx-server-sdk');
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
 const db = cloud.database();
+const MAX_LIMIT = 100;
 
 exports.main = async (event, context) => {
   try {
-    // Fetch all documents from mortgage_config collection
-    const { data } = await db.collection('mortgage_config').get();
+    const collection = db.collection('mortgage_config');
 
-    if (!data || data.length === 0) {
+    // Get total count first
+    const { total } = await collection.count();
+    if (total === 0) {
       return { success: false, error: 'No data in cloud database' };
     }
+
+    // Fetch all documents with pagination
+    const batchCount = Math.ceil(total / MAX_LIMIT);
+    const tasks = [];
+    for (let i = 0; i < batchCount; i++) {
+      tasks.push(
+        collection.skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+      );
+    }
+    const results = await Promise.all(tasks);
+    const allData = results.reduce((acc, cur) => acc.concat(cur.data), []);
 
     // Organize data by type
     const result = {
@@ -22,7 +36,7 @@ exports.main = async (event, context) => {
       cities: {},
     };
 
-    data.forEach((doc) => {
+    allData.forEach((doc) => {
       if (doc.type === 'lpr') {
         result.lpr = {
           oneYear: doc.oneYear,
